@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a place</title>
+    <link rel="stylesheet" href="/assets/rentform.css" class="css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="apply_box">
+            
+            <h1>Booking Application</h1>
+
+            <form action="" method="POST">
+                <div class="form_container">
+                    <div class="form_control">
+                        <label for="first_name">First Name:</label>
+                        <input id="first_name" name="first_name" placeholder="Enter First Name" required/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="last_name">Last Name:</label>
+                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter Email" required/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="number">Phone number:</label>
+                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="lot">Lot ID:</label>
+                        <input type="text" id="lot" name="lot" placeholder="Enter Lot ID" required/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="catering">Catering Service:</label>
+                        <select name="catering" id="catering">
+                            <option value="">Select Catering Service</option>
+                            <option value="none">None</option>
+                            <option value="cat1">Service 1</option>
+                            <option value="cat2">Service 2</option>
+                            <option value="cat3">Service 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="decor">Decoration Service:</label>
+                        <select name="decor" id="decor">
+                            <option value="">Select Decoration Service</option>
+                            <option value="none">None</option>
+                            <option value="decor1">Service 1</option>
+                            <option value="decor2">Service 2</option>
+                            <option value="decor3">Service 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="capacity">Capacity:</label>
+                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required/>
+                    </div>
+
+                    <div class="textarea_control">
+                        <label for="address">Address:</label>
+                        <textarea name="address" id="address" cols="50" rows="4" placeholder="Enter address"></textarea>
+                    </div>
+
+
+                    <div class="form_control">
+                        <label for="date">Date of event:</label>
+                        <input value="" type="date" id="date" name="date" />
+                    </div>
+
+                </div>
+
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
