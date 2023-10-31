@@ -6,12 +6,8 @@
     box-sizing: border-box;
 }
 
-body{
-    font-family: montserrat;
-}
-
 nav{
-    background: #225882;
+    background: #440f3c; /* darker */
     height: 80px;
     width: 100%;
 }
@@ -19,6 +15,7 @@ nav{
 label.logo{
     color: white;
     font-size: 35px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     line-height: 80px;
     padding: 0 100px;
     font-weight: bold;
@@ -37,35 +34,17 @@ nav ul li{
 
 nav ul li a{
     color: white;
-    font-size: 17px;
+    font-size: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 2px;
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
 }
 
 a.active, a:hover{
-    background: #5891bd;
+    background: #5e0755;  /* lighter */
     transition: 0.5s;
-}
-
-.checkbtn{
-    font-size: 30px;
-    color:white;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
-
-.checkbtn i {
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-}
-
-#check {
-    display: none;
 }
 
 @media (max-width: 952px){
@@ -109,13 +88,6 @@ a.active, a:hover{
     }
 }
 
-section.image{
-    background-image: url('images/event1.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: calc(100vh - 80px);
-}
-
 .dropdown {
     position: relative;
 }
@@ -123,9 +95,10 @@ section.image{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #225882; /* Background color for the dropdown */
+    background-color: #440f3c; /* Background color for the dropdown */
     min-width: 135px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
@@ -139,17 +112,92 @@ section.image{
     text-decoration: none;
     display: block;
     transition: 0.3s;
-    font-size: 13px;
+    font-size: 10px;
 }
 
 /* Change link color on hover */
 .dropdown-content a:hover {
-    background-color:  #5891bd; /* Background color on hover */
+    background-color:  #5e0755; /* Background color on hover */
     color: white;
 }
 
 section.footer{
-    background-color: #225882;
-    padding: 25px;
+    background-color:#440f3c;
+    padding: 10px;
     color: white;
+}
+
+html,body{
+    height: 100%;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    line-height: 1.8cm;
+    color: rgb(26, 136, 118);
+}
+
+.pimg1{
+    background-image: url(images/img2.jpg);
+    min-height: 70%;
+}
+
+.pimg2{
+    background-image: url(images/event1.jpg);
+    min-height: 500px;
+}
+
+.pimg3{
+    background-image: url(images/img3.png);
+    min-height: 500px;
+}
+
+.pimg4{
+    background-image: url(images/img4.jpg);
+    min-height: 500px;
+}
+
+.pimg1, .pimg2, .pimg3, .pimg4{
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.ptext{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    font-weight: bold;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    outline: auto;
+    outline-color: white;
+}
+
+.textBg{
+    color: white;
+    padding: 20px;
+}
+
+.section{
+    padding: 50px 80px;
+    text-align: center;
+}
+
+.section_light{
+    background-color: rgb(229, 223, 223);
+    color: #440f3c; 
+    font-size: 25px;
+}
+
+.section_dark{
+    background-color:  #440f3c;
+    color: white;
+    font-size: 25px;
 }

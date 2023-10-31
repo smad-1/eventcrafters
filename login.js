@@ -51,12 +51,18 @@ app.get('/views/index.html', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/views/registration.html', encoder, function (req, res) {
+app.post('/register', encoder, function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    // Insert the user registration data into the MySQL table
-    conn.query('INSERT INTO user (user_name, user_pass) VALUES (?, ?)', [username, password], function (error, results, fields) {
+    // check if already exists
+    conn.query("select * from user where user_name = ? and user_pass = ?", [username,password],function(error,results,fields){
+        if(results.length > 0){
+            res.redirect("/views/registration.html");
+            console.log("User already exists.");
+        }else{
+        // Insert the user registration data into the MySQL table
+        conn.query('INSERT INTO user (user_name, user_pass) VALUES (?, ?)', [username, password], function (error, results, fields) {
         if (error) {
             console.error('Registration failed:', error);
             res.redirect('/views/registration.html'); // Redirect back to the registration page
@@ -64,6 +70,8 @@ app.post('/views/registration.html', encoder, function (req, res) {
             res.redirect('/views/welcome.html'); // Redirect to a welcome page or login page
         }
         res.end();
+        });
+        }
     });
 });
 
@@ -80,5 +88,5 @@ app.get('/views/rentplace.html', (req, res) => {
 
 //set app port
 
-app.listen(5009);
+app.listen(5000);
  
