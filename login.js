@@ -85,8 +85,16 @@ app.get('/views/rentplace.html', (req, res) => {
     res.sendFile(__dirname + '/views/bookplace.html');
   }); 
 
+  app.get('/views/birthday_page.html', (req, res) => {
+    res.sendFile(__dirname + '/views/birthday_page.html');
+  });
+  app.get('/views/decor.html', (req, res) => {
+    res.sendFile(__dirname + '/views/decor.html');
+  });
+  
+
 
 //set app port
 
-app.listen(5000);
+app.listen(5004);
  

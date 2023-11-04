@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Decor</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #a7afdd, #8977ffd6, #000345, #000);
+            background-size: 400% 400%;
+            animation: gradient 5s linear infinite;
+        }
+    
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #navbar {
+            background-color: rgba(51, 51, 51, 0.7); 
+            height: 60px;
+            color: #fff;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 10px;
+            width: 100%;
+        }
+
+        #navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px; 
+        }
+
+        #content {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .decor-container {
+            display: flex;
+            flex-direction: row; 
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .decor-image {
+            width: 400px; 
+            height: 400px; 
+            object-fit: cover; 
+            margin-right: 20px; 
+        }
+
+        .decor-details {
+            color: #fff; 
+            text-align: left; 
+        }
+
+       
+        #decor-type-container {
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        #decor-type-heading {
+            font-size: 24px;
+            text-align: center;
+            color: #fff; 
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+    </div>
+    <div id="content">
+        <div class="decor-container">
+            <img class="decor-image" src="/assets/images/bday1.jpeg" alt="Birthday Decoration 1">
+            <div class="decor-details">
+                <p>Total Cost: Tk.5000</p>
+                <p>Decor ID: D1</p>
+                <p>Time to Complete: 2.5 hours</p>
+                <p>You can add any color of balloons and curtains. You can choose the theme color.</p>
+            </div>
+        </div>
+        <div class="decor-container">
+            <img class="decor-image" src="/assets/images/bday2.jpg" alt="Birthday Decoration 2">
+            <div class="decor-details">
+                <p>Total Cost: Tk.3600</p>
+                <p>Decor ID: D2</p>
+                <p>Time to Complete: 2 hours</p>
+                <p>You can choose any cartoon theme. You can also customize the theme color.</p>
+            </div>
+        </div>
+        <div class="decor-container">
+            <img class="decor-image" src="/assets/images/bday3.jpg" alt="Birthday Decoration 3">
+            <div class="decor-details">
+                <p>Total Cost: Tk.1500</p>
+                <p>Decor ID: D1</p>
+                <p>Time to Complete: 1 hour</p>
+                <p>You can choose your color. You can also choose your favorite paper-craft.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
