@@ -39,7 +39,7 @@ body{
 }
 
 .form_control{
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
 }
 

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a place</title>
+    <script src="multiselect-dropdown.js"></script>
     <link rel="stylesheet" href="/assets/rentform.css" class="css">
 </head>
 <body>
@@ -14,7 +15,7 @@
             
             <h1>Space Rental Application</h1>
 
-            <form action="" method="POST">
+            <form action="/rentplace" method="POST">
                 <div class="form_container">
                     <div class="form_control">
                         <label for="first_name">First Name:</label>
@@ -67,6 +68,17 @@
                             <option value="decor3">Service 3</option>
                         </select>
                     </div>
+                    
+                    <div class="form_control">
+                        <label>Events:</label><br>
+                        <input type="checkbox" id="bday" name="event" value="bday">
+                        <label for="bday">Birthday Party</label><br>
+                        <input type="checkbox" id="wedding" name="event" value="wedding">
+                        <label for="wedding">Wedding</label><br>
+                        <input type="checkbox" id="picnic" name="event" value="picnic">
+                        <label for="picnic">Picnic</label><br><br>
+                    </div>
+                    
 
                     <div class="textarea_control">
                         <label for="address">Address:</label>
