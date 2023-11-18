@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <style>
+        body {
+            background-image: url('/assets/images/uwu.jpg');
+            background-size: 100% auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 50vh;
+            margin: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: white;
+            padding: 15px; 
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar li {
+            margin: 0 20px;
+        }
+
+        .navbar a {
+        
+            text-decoration : none; 
+            color: beige;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+            padding: 30px; 
+            width: 500px;
+            background-color: transparent; 
+            overflow: hidden;
+            color: beige;
+        }
+
+        .card img {
+            width: 0;
+            height: 250px;
+            margin-right: 10px;
+            animation: slideInFromLeft 3s ease forwards; 
+            
+        }
+
+        .description, h2 {
+            flex: 1;
+            width: 0;
+            animation: slideInFromRight 1s ease forwards; 
+        }
+
+        @keyframes slideInFromLeft {
+            to {
+                width: 250px; 
+            }
+        }
+
+        @keyframes slideInFromRight {
+            to
+            {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="/assets/images/rent.jpg" alt="Rent">
+            <div class="description">
+                <h2 style="color: beige;">Put up a place for rent</h2>
+                <p>You can put your place for rent to host any event. Clients can book your place based on their preferences.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/assets/images/book.jpg" alt="Book">
+            <div class="description">
+                <h2>Book a place</h2>
+                <p>Book any available place you want for your event.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/assets/images/payment.jpg" alt="Payment">
+            <div class="description">
+                <h2>Pay for your booking</h2>
+                <p>Make payment for the lot you have booked.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
