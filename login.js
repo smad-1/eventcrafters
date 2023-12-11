@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const encoder = bodyParser.urlencoded();
 
+
 class user 
 {
     static curr_user
@@ -25,6 +26,7 @@ conn.connect(function(error){
 app.get("/",function(req,res){
     res.sendFile(__dirname + "/views/index.html");
 })
+
 
 app.post("/login",encoder,function(req,res){
     var username= req.body.username;
@@ -130,17 +132,9 @@ app.post('/rentplace', encoder, function (req, res) {
     var addr = req.body.address
     var info = req.body.info
     var firstinserttion = false
-    var tempLotID = 0
 
-    //check if user already has a lot. If there is a lot, get the lotvalue, and increment the lotID by 1.
-    conn.query("select userID, lotID from rentlots where userID = ?", [user.curr_user], function (error, results, fields) {
-        if (results.length> 0) {
-            console.log("paisi and it is userID " + results[0].userID);
-            tempLotID = results[0].lotID
-        } else {
-            console.log("first timer");
-        }
-    });
+
+
     // check if already exists
     for(let i =0; i<3; i++)
     {
@@ -148,24 +142,24 @@ app.post('/rentplace', encoder, function (req, res) {
         var uid = user.curr_user
         if(req.body.event[i] != undefined)
         {
-        conn.query("select userID, lotID, events from rentlots where userID = ? and lotID = ? and events = ?", [user.curr_user,uid+tempLotID,req.body.event[i]],function(error,results,fields){
+        conn.query("select userID, lotID, events from rentlots where userID = ? and lotID = ? and events = ?", [user.curr_user,1,req.body.event[i]],function(error,results,fields){
         if(results.length > 0){
             res.redirect("/views/welcome.html");
             console.log("User already exists.");
         }else{
         // Insert the user registration data into the MySQL table
         conn.query('INSERT INTO rentlots (userID, lotID, First_name, Last_name, Email, Phone_no, Lot_Name, Capacity, events, Address, Extra_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-        [uid, uid+tempLotID, fName, lName, email, phone_no, lotname, capacity, req.body.event[i], addr, info], function (error, results, fields) {
+        [uid, 1, fName, lName, email, phone_no, lotname, capacity, req.body.event[i], addr, info], function (error, results, fields) {
         if (error) {
             console.error('Submission failed:', error);
-            res.redirect('/views/rentplace.html'); // Redirect back to the registration page
+            //res.redirect('/views/rentplace.html'); // Redirect back to the registration page
         } else {
-            res.redirect('/views/welcome.html'); // Redirect to a welcome page or login page
+            //res.redirect('/views/welcome.html'); // Redirect to a welcome page or login page
         }
     
         res.end();
         });
-        conn.query('INSERT INTO lot_activity (userID, lotID, activity) VALUES (?, ?, ?)', 
+        /*conn.query('INSERT INTO lot_activity (userID, lotID, activity) VALUES (?, ?, ?)', 
         [uid, 1, req.body.event[i]], function (error, results, fields) {
         if (error) {
             console.error('Activity failed:', error);
@@ -174,15 +168,17 @@ app.post('/rentplace', encoder, function (req, res) {
             res.redirect('/views/welcome.html'); // Redirect to a welcome page or login page
         }
     
-        res.end();
-        });
         
-        }
+        });*/
+        
+     }
         });
 }
     }
+    res.redirect('/views/welcome.html');
+    res.end();
 
 });
 
 app.listen(5004);
- 
+
