@@ -115,6 +115,13 @@ app.get('/views/rentplace.html', (req, res) => {
     res.sendFile(__dirname + '/views/Payment.html');
   });
 
+  app.get('/views/feedback.html', (req, res) => {
+    res.sendFile(__dirname + '/views/feedback.html');
+  }); 
+
+  app.get('/views/aboutus.html', (req, res) => {
+    res.sendFile(__dirname + '/views/aboutus.html');
+  }); 
 
 //set app port
 
