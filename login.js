@@ -233,7 +233,7 @@ app.get('/lots', (req, res) => {
   app.get('/myrequests', (req, res) => {
     const { userID } = req.query;
     // Fetch data from the database
-    const query = 'SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state FROM reservations, rentlots WHERE customerID = rentlots.userID AND rentlots.lotID = reservations.lotID AND reservations.userID = ?';
+    const query = 'SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state FROM reservations, rentlots WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND reservations.userID = ?';
     conn.query(query, [userID], (err, results) => {
       if (err) throw err;
       console.log(results);
