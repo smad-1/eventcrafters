@@ -1,8 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    align-items: center;
+    text-align: center;
+    background-color: #440f3c;
+  }
+
+  .top{
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
   }
   
   #data-container {
@@ -14,17 +29,35 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  #data-container button {
-    align-self: flex-end; /* Align the button to the right end */
-  margin-top: 20px; /* Adjust as needed */
+  .sort {
+  margin: 10px;
   padding: 10px;
-  background-color: #4caf50; /* Green background color */
+  background-color: #440f3c; /* Green background color */
   color: #fff; /* White text color */
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 150px;
   }
   
-  #data-container button:hover {
-    background-color: #45a049; /* Darker green on hover */
+  .sort:hover {
+    background-color: #5e0755; /* Darker green on hover */
+  }
+
+  .inside{
+    margin: 20px;
+    text-align: left;
+    
+  }
+
+  .btn{
+    margin-top: 10px;
+    margin-right: 10px;
+  padding: 10px;
+  background-color: #440f3c; /* Green background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 90px;
   }

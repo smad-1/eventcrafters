@@ -3,10 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/yourlists.css">
-  <title>MySQL Data Display</title>
+  <title>My Lots</title>
+  <style>
+
+    * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    align-items: center;
+    text-align: center;
+    background-color: #440f3c;
+  }
+
+  .top{
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+
+  .description{
+    margin: 20px;
+    margin-bottom: 30px;
+  }
+  
+  #data-container {
+    text-align: left;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .butn{
+    margin-top: 10px;
+    margin-right: 10px;
+  padding: 10px;
+  background-color: #440f3c; /* Green background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 90px;
+  }
+
+  </style>
 </head>
 <body>
+  <div class="top">My Lots</div>
+
   <div id="data-container"></div>
   <script>
     document.addEventListener('DOMContentLoaded', fetchData);
@@ -69,12 +122,15 @@
         listItem.innerHTML = `
         <div class="card">
           <div class="description">
-            <strong>${item.lotID}</strong>: ${item.First_name}
-            <button onclick="rentNow('${item.userID}', '${item.lotID}', '${selectBox.id}')">Rent Now</button>
-            </div>
-            <label for="choices">Select a choice:</label>
-            ${selectBox.outerHTML}
-          
+            <strong>Lot ID:</strong> ${item.lotID}<br>
+            <strong>Lot Name:</strong>: ${item.Lot_Name}<br>
+            <strong>Capacity:</strong>: ${item.Capacity}<br>
+            <strong>Region:</strong>: ${item.Area}<br>
+            <strong>Address:</strong>: ${item.Address}<br>
+            
+            <button class="butn">Update</button>
+            <button class="butn">Delete</button>
+            </div>    
         </div>
        
     `;

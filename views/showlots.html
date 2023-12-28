@@ -5,13 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/yourlists.css">
-  <title>MySQL Data Display</title>
+  <title>Available Lots</title>
 </head>
 
 <body>
+
+  <div class="top">Available Lots</div><br>
+
   <div id="data-container">
-    <button onclick="toggleSorting('price')">Toggle Sorting by Price</button>
-    <button onclick="toggleSorting('capacity')">Toggle Sorting by Capacity</button>
+    
+    <button class="sort" onclick="toggleSorting('price')">Sort by Price</button>
+    <button class="sort" onclick="toggleSorting('capacity')">Sort by Capacity</button>
 
     <label for="areaSelect">Select an Area:</label>
     <select id="areaSelect" onchange="fetchData()">
@@ -20,9 +24,10 @@
       <option value="Uttara">Uttara</option>
       <option value="Banani">Banani</option>
       <option value="Bailey Road">Bailey Road</option>
-
     </select>
+
   </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', fetchData);
 
@@ -96,13 +101,17 @@
           i++;
         });
 
-        listItem.innerHTML = `
-      <strong>${item.lotID}</strong>: ${item.First_name}
-      <button onclick="rentNow('${item.userID}', '${item.lotID}', '${selectBox.id}')">Rent Now</button>
-      <button onclick="feedbacc('${item.userID}', '${item.lotID}')">Feedback</button>
+        listItem.innerHTML = `<div class="inside">
+      <strong>Lot ID:</strong> ${item.lotID} <br>
+      <strong>Lot Name:</strong> ${item.Lot_Name}<br>
+      <strong>Lot Owner: </strong> ${item.First_name} <br>
+      <strong>Contact: </strong> ${item.Phone_no}<br>
+      <strong>Email: </strong> ${item.Email} <br>
+      <button class="btn" onclick="rentNow('${item.userID}', '${item.lotID}', '${selectBox.id}')">Rent Now</button>
+      <button class="btn" onclick="feedbacc('${item.userID}', '${item.lotID}')">Feedback</button>
       <label for="choices">Select a choice:</label>
       ${selectBox.outerHTML}
-    `;
+      </div>`;
 
         container.appendChild(listItem);
       }

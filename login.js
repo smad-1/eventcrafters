@@ -441,8 +441,8 @@ app.post('/bookplace', encoder, function (req, res) {
     
     
 
-    const query = 'INSERT INTO reservations (customerID, userID, lotID, activityID, First_name, Last_name, Email, Phone_no, Numberofpeople, resTime, eventDate, startTime, endTime, catering, decor, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    conn.query(query, [user.curr_user, ownerID, lotID, actID, fName, lName, email, phone_no, noofpeople, date, resDate, sTime, eTime, catering, decor, approved ], (error, results) => 
+    const query = 'INSERT INTO reservations (customerID, userID, lotID, activityID, First_name, Last_name, Email, Phone_no, Numberofpeople, resTime, eventDate, startTime, endTime, catering, decor, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    conn.query(query, [user.curr_user, ownerID, lotID, actID, fName, lName, email, phone_no, noofpeople, date, resDate, sTime, eTime, catering, decor, "requested" ], (error, results) => 
     {
         if(error)
         {

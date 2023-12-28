@@ -73,6 +73,19 @@
             animation: slideInFromRight 1s ease forwards; 
         }
 
+        .linkk{
+            color: white;
+            text-decoration: none;
+        }
+
+        .ok{
+            background-color: #440f3c;
+            font-size: 15px;
+            border-radius: 5px;
+            width: 200px;
+            height: 50px;
+        }
+
         @keyframes slideInFromLeft {
             to {
                 width: 250px; 
@@ -100,7 +113,7 @@
         <div class="card">
             <img src="/assets/images/rent.jpg" alt="Rent">
             <div class="description" id="rent">
-                <h2 style="color: beige;"><a href="/views/rentplace.html">Put up a place for rent</a></h2>
+                <h2 style="color: beige;"><a class="linkk" href="/views/rentplace.html">Put up a place for rent</a></h2>
                 <p>You can put your place for rent to host any event. Clients can book your place based on their preferences.</p>
             </div>
         </div>
@@ -108,7 +121,7 @@
         <div class="card">
             <img src="/assets/images/book.jpg" alt="Book">
             <div class="description" id="showlots">
-                <h2><a href="#">Book a place</a></h2>
+                <h2><a class="linkk" href="#">Book a place</a></h2>
                 <p>Book any available place you want for your event.</p>
             </div>
         </div>
@@ -133,11 +146,11 @@
         var userID = getUrlParameter('userID');
 
         var showLotsItem = document.getElementById('showlots');
-        showLotsItem.innerHTML = `<h2><a href="/views/showlots.html?userID=${userID}">Book a place</a></h2>
+        showLotsItem.innerHTML = `<h2><button class="ok"><a class="linkk" href="/views/showlots.html?userID=${userID}">Book a place</a></button></h2>
                 <p>Book any available place you want for your event.</p>`;
         
         var showLotsItem = document.getElementById('rent');
-        showLotsItem.innerHTML = `<h2 style="color: beige;"><a href="/views/rentplace.html?userID=${userID}">Put up a place for rent</a></h2>
+        showLotsItem.innerHTML = `<h2 style="color: beige;"><button class="ok"><a class="linkk" href="/views/rentplace.html?userID=${userID}">Put up a place for rent</a></button></h2>
                 <p>You can put your place for rent to host any event. Clients can book your place based on their preferences.</p>`;
 
     </script>

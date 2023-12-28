@@ -3,10 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/assets/yourlists.css">
   <title>My Bookings</title>
+
+  <style>
+
+    * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    align-items: center;
+    text-align: center;
+    background-color: #440f3c;
+  }
+
+  .top{
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+
+  .description{
+    margin: 20px;
+    margin-left: 0px;
+    margin-bottom: 30px;
+  }
+
+  .type{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .dropdown-content{
+    margin-left: 25px;
+  }
+
+  li{
+    margin-bottom: 5px;
+  }
+  
+  #data-container {
+    text-align: left;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  button{
+    margin-left: 20px;
+  padding: 10px;
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  }
+
+  </style>
 </head>
 <body>
+  <div class="top">My Bookings</div>
+
   <div id="data-container"></div>
   <script>
     document.addEventListener('DOMContentLoaded', fetchData);
@@ -50,23 +117,27 @@
                 // Update button color and text based on the received data
                 if (item.state == 'requested') {
                     buttonElement.style.backgroundColor = 'red';
-                    buttonElement.innerText = 'Pending';
+                    buttonElement.innerText = 'Pending Approval';
                 } else if (item.state == 'approved') {
                     buttonElement.style.backgroundColor = 'orange';
-                    buttonElement.innerText = 'Payment waiting';
+                    buttonElement.innerText = 'Payment Waiting';
                     buttonElement.addEventListener('click', () => handlePaymentButtonClick(item.reservationID, item.lot, item.owner, item.eventDate));
                 }
 
           listItem.innerHTML = `
           <div class="card">
-            <strong>Lot ID  ${item.lot}</strong>: Your ID is ${item.customerID}
+            <strong>Lot ID: </strong>  ${item.lot}<br>
+            <strong>Owner ID: </strong>  ${item.customerID}<br>
             <div class="description">
-              <h2>${item.activityID}</h2>
+              <div class="type">${item.activityID}  </div>
               <ul class="dropdown-content">
                 <li><b>Date of event: </b> ${item.eventDate}</li>
                 <li><b>Staring time: </b>${item.startTime}</li> <!-- ekhane cng-->
+                <li><b>Ending time: </b>${item.endTime}</li>
                 <li><b>Owner's contact: </b> ${item.Phone_no}</li>
                 <li><b>Owner's email: </b> ${item.Email}</li>
+                <li><b>Catering service: </b>${item.catering}</li>
+                <li><b>Decor service: </b>${item.decor}</li>
               </ul>
               
             </div>
