@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/yourlists.css">
+  <title>MySQL Data Display</title>
+</head>
+
+<body>
+  <div id="data-container">
+    <button onclick="toggleSorting('price')">Toggle Sorting by Price</button>
+    <button onclick="toggleSorting('capacity')">Toggle Sorting by Capacity</button>
+
+    <label for="areaSelect">Select an Area:</label>
+    <select id="areaSelect" onchange="fetchData()">
+      <option value="">Select Area</option>
+      <option value="Dhanmondi">Dhanmondi</option>
+      <option value="Uttara">Uttara</option>
+      <option value="Banani">Banani</option>
+      <option value="Bailey Road">Bailey Road</option>
+
+    </select>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', fetchData);
+
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    var iduser = getUrlParameter('userID');
+    let priceSorting = false;
+    let capacitySorting = false;
+
+    function toggleSorting(option) {
+      if (option === 'price') {
+        priceSorting = !priceSorting;
+        capacitySorting = false;
+      } else if (option === 'capacity') {
+        capacitySorting = !capacitySorting;
+        priceSorting = false;
+      }
+      fetchData();
+    }
+
+    async function fetchData() {
+      try {
+        const areaSelect = document.getElementById('areaSelect');
+        const selectedArea = areaSelect.value;
+
+        const response = await fetch(`http://localhost:5005/lots?userID=${iduser}&area=${selectedArea}&price=${priceSorting}&capacity=${capacitySorting}`);
+        const data = await response.json();
+        console.log("here please");
+        console.log(data);
+        displayData(data);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    }
+
+    async function fetchOptions(userID, lotID) {
+      try {
+        const response = await fetch(`http://localhost:5005/options?userID=${userID}&lotID=${lotID}`);
+        const options = await response.json();
+        return options;
+      } catch (error) {
+        console.error('Error fetching options: ', error);
+        return [];
+      }
+    }
+
+    async function displayData(data) {
+      const container = document.getElementById('data-container');
+      let num = 0;
+
+      for (const item of data) {
+        const listItem = document.createElement('div');
+
+        const choices = await fetchOptions(item.userID, item.lotID);
+
+        const selectBox = document.createElement('select');
+        selectBox.id = num;
+        num++;
+        let i = 0;
+        choices.forEach((choice) => {
+
+          const option = document.createElement('option');
+          option.value = i;
+          option.text = choice.activity;
+          selectBox.appendChild(option);
+          i++;
+        });
+
+        listItem.innerHTML = `
+      <strong>${item.lotID}</strong>: ${item.First_name}
+      <button onclick="rentNow('${item.userID}', '${item.lotID}', '${selectBox.id}')">Rent Now</button>
+      <button onclick="feedbacc('${item.userID}', '${item.lotID}')">Feedback</button>
+      <label for="choices">Select a choice:</label>
+      ${selectBox.outerHTML}
+    `;
+
+        container.appendChild(listItem);
+      }
+    }
+
+    async function rentNow(userID, lotID, act) {
+      const selectedOption = document.getElementById(act);
+      const selectedText = selectedOption.options[selectedOption.value].text;
+      // Redirect to another HTML file with the selected userID and lotID
+      window.location.href = `/views/bookplace.html?userID=${userID}&lotID=${lotID}&activity=${selectedText}`;
+
+    }
+
+    async function feedbacc(userID, lotID) {
+
+      // Redirect to another HTML file with the selected userID and lotID
+      window.location.href = `/views/feedback.html?ownerID=${userID}&lotID=${lotID}&customerID=${iduser}`;
+
+    }
+  </script>
+</body>
+
+</html>

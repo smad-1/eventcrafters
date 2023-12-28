@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  #data-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #data-container button {
+    align-self: flex-end; /* Align the button to the right end */
+  margin-top: 20px; /* Adjust as needed */
+  padding: 10px;
+  background-color: #4caf50; /* Green background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  }
+  
+  #data-container button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }

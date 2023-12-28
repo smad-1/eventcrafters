@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/yourlists.css">
+  <title>My Bookings</title>
+</head>
+<body>
+  <div id="data-container"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', fetchData);
+
+    function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        //var username = getUrlParameter('username');
+        //var userID = getUrlParameter('userID');
+
+    async function fetchData() {
+        try {
+            var userID = getUrlParameter('userID');
+          const response = await fetch(`http://localhost:5005/myrequests?userID=${userID}`);
+          const data = await response.json();
+          console.log(data);
+          displayData(data);
+        } catch (error) {
+          console.error('Error fetching data: ', error);
+        }
+    }
+
+      async function displayData(data) {
+      const container = document.getElementById('data-container');
+      let num = 0;
+
+      for (const item of data) {
+          const listItem = document.createElement('div');
+
+          const buttonElement = document.createElement('button');
+          buttonElement.id = `button_${item.reservationID}`;
+                // Update button color and text based on the received data
+                if (item.state == 'requested') {
+                    buttonElement.style.backgroundColor = 'yellow';
+                    buttonElement.style.textDecorationColor = 'black';
+                    buttonElement.innerText = 'Approve?';
+                    buttonElement.addEventListener('click', () => handleApproveButtonClick(item.reservationID));
+
+                } else if (item.state == 'approved') {
+                    buttonElement.style.backgroundColor = 'red';
+                    buttonElement.innerText = 'Not Paid';
+                }
+                else 
+                {
+                    buttonElement.style.backgroundColor = 'green';
+                    buttonElement.innerText = 'Paid';
+                }
+
+
+          listItem.innerHTML = `
+          <div class="card">
+            <strong>Lot ID  ${item.lot}</strong>: From customer ID ${item.customerID}
+            <div class="description">
+              <h2>${item.activityID}</h2>
+              <ul class="dropdown-content">
+                <li><b>Date of event: </b> ${item.eventDate}</li>
+                <li><b>Staring time: </b>${item.startTime}</li> <!-- ekhane cng-->
+                <li><b>Customer's contact: </b> ${item.Phone_no}</li>
+                <li><b>Customer's email: </b> ${item.Email}</li>
+              </ul>
+              
+            </div>
+        </div>`;
+            listItem.appendChild(buttonElement);
+          container.appendChild(listItem);
+        }
+      }
+
+       function handleApproveButtonClick(RID) {
+         fetch(`/updatetoApproved?reservationID=${RID}`);
+        const btn = document.getElementById(`button_${RID}`);
+        btn.style.backgroundColor = 'red';
+        btn.innerText = 'Not Paid';
+
+    }
+
+      async function rentNow(useriD, lotID) {
+        const selectedOption = document.getElementById(act);
+        const selectedText = selectedOption.options[selectedOption.value].text;
+      // Redirect to another HTML file with the selected userID and lotID
+      window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+
+    }
+  </script>
+</body>
+</html>
