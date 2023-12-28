@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,57 +9,88 @@
     <script src="multiselect-dropdown.js"></script>
     <link rel="stylesheet" href="/assets/rentform.css" class="css">
 </head>
+
 <body>
     <div class="container">
 
         <div class="apply_box">
-            
+
             <h1>Space Rental Application</h1>
 
             <form action="/rentplace" method="POST">
                 <div class="form_container">
                     <div class="form_control">
                         <label for="first_name">First Name:</label>
-                        <input id="first_name" name="first_name" placeholder="Enter First Name" required/>
+                        <input id="first_name" name="first_name" placeholder="Enter First Name" required />
                     </div>
 
                     <div class="form_control">
                         <label for="last_name">Last Name:</label>
-                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required/>
+                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required />
                     </div>
 
                     <div class="form_control">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Enter Email" required/>
+                        <input type="email" id="email" name="email" placeholder="Enter Email" required />
                     </div>
 
                     <div class="form_control">
                         <label for="number">Phone number:</label>
-                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required/>
+                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required />
                     </div>
 
                     <div class="form_control">
                         <label for="lotname">Lot name:</label>
-                        <input type="text" id="lotname" name="lotname" placeholder="Enter Lot Name" required/>
+                        <input type="text" id="lotname" name="lotname" placeholder="Enter Lot Name" required />
                     </div>
 
                     <div class="form_control">
                         <label for="capacity">Capacity:</label>
-                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required/>
+                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required />
                     </div>
 
-        
-                    
+
                     <div class="form_control">
-                        <label>Events:</label><br>
-                        <input type="checkbox" id="bday" name="event" value="bday">
-                        <label for="bday">Birthday Party</label><br>
-                        <input type="checkbox" id="wedding" name="event" value="wedding">
-                        <label for="wedding">Wedding</label><br>
-                        <input type="checkbox" id="picnic" name="event" value="picnic">
-                        <label for="picnic">Picnic</label><br><br>
+                        <label>Activities:</label><br>
+
+                        <label>
+                            <input type="checkbox" id="bday" name="activity" value="Birthday"> Birthday Party
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="wedding" name="activity" value="Wedding"> Wedding
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="picnic" name="activity" value="Picnic"> Picnic
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="babyshower" name="activity" value="Baby Shower"> Baby Shower
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="conference" name="activity" value="Conference"> Conference
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="celebration" name="activity" value="Celebration"> Celebration
+                            Party
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="formal" name="activity" value="Formal"> Formal Gathering
+                        </label><br>
+
+                        <input type="hidden" name="activity" value="null" />
                     </div>
-                    
+
+                    <div class="form_control">
+                        <label for="area">Area:</label>
+                        <select name="area" id="area">
+                            <option value="">Select Area</option>
+                            <option value="none">None</option>
+                            <option value="Dhanmondi">Dhanmondi</option>
+                            <option value="Uttara">Uttara</option>
+                            <option value="Banani">Banani</option>
+                            <option value="Bailey Road">Bailey Road</option>
+                        </select>
+                    </div>
+
 
                     <div class="textarea_control">
                         <label for="address">Address:</label>
@@ -78,12 +110,47 @@
                 </div>
 
                 <div class="button">
-                    <button type="submit">Submit</button>
+                    <button type="submit" onclick="submitting()">Submit</button>
                 </div>
 
             </form>
         </div>
     </div>
-    
+
+    <script>
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        const userID = getUrlParameter('userID');
+
+        async function submitting() {
+
+            fetch('/rentplace', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userID: getUrlParameter('userID')
+                }),
+
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert("inside alert" + userID);
+                    console.log(result.message);
+                })
+                .catch(error => console.error('Error deleting task:', error));
+
+            //window.location.href = `/views/feedback.html?ownerID=${ownerID}&lotID=${lotID}&customerID=${customerID}`;
+        }
+    </script>
+
 </body>
+
 </html>

@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/images/bg1.jpg'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidenav a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    margin: 10px 0;
+}
+
+.sidenav a:hover {
+    background-color: #555;
+}
+
+
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.form-section {
+    margin-bottom: 20px;
+    width: 48%; 
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="radio"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.credit-card-fields {
+    display: none; 
+}
+
+
+.bkash-number-field {
+    display: none; 
+}
+
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+
+.submit-button {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}

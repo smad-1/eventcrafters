@@ -99,16 +99,16 @@
     <div class="card-container">
         <div class="card">
             <img src="/assets/images/rent.jpg" alt="Rent">
-            <div class="description">
-                <h2 style="color: beige;">Put up a place for rent</h2>
+            <div class="description" id="rent">
+                <h2 style="color: beige;"><a href="/views/rentplace.html">Put up a place for rent</a></h2>
                 <p>You can put your place for rent to host any event. Clients can book your place based on their preferences.</p>
             </div>
         </div>
 
         <div class="card">
             <img src="/assets/images/book.jpg" alt="Book">
-            <div class="description">
-                <h2>Book a place</h2>
+            <div class="description" id="showlots">
+                <h2><a href="#">Book a place</a></h2>
                 <p>Book any available place you want for your event.</p>
             </div>
         </div>
@@ -121,5 +121,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+        
+        var userID = getUrlParameter('userID');
+
+        var showLotsItem = document.getElementById('showlots');
+        showLotsItem.innerHTML = `<h2><a href="/views/showlots.html?userID=${userID}">Book a place</a></h2>
+                <p>Book any available place you want for your event.</p>`;
+        
+        var showLotsItem = document.getElementById('rent');
+        showLotsItem.innerHTML = `<h2 style="color: beige;"><a href="/views/rentplace.html?userID=${userID}">Put up a place for rent</a></h2>
+                <p>You can put your place for rent to host any event. Clients can book your place based on their preferences.</p>`;
+
+    </script>
 </body>
 </html>

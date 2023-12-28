@@ -14,7 +14,7 @@
             
             <h1>Booking Application</h1>
 
-            <form action="" method="POST">
+            <form action="/bookplace" method="POST">
                 <div class="form_container">
                     <div class="form_control">
                         <label for="first_name">First Name:</label>
@@ -38,8 +38,9 @@
 
                     <div class="form_control">
                         <label for="lot">Lot ID:</label>
-                        <input type="text" id="lot" name="lot" placeholder="Enter Lot ID" required/>
+                        <input type="text" id="lot" name="lot" placeholder="Enter Lot ID" required readonly="true"/>
                     </div>
+                   
 
                     <div class="form_control">
                         <label for="catering">Catering Service:</label>
@@ -68,9 +69,47 @@
                         <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required/>
                     </div>
 
-                    <div class="textarea_control">
-                        <label for="address">Address:</label>
-                        <textarea name="address" id="address" cols="50" rows="4" placeholder="Enter address"></textarea>
+                    <div class="form_control">
+                        <label for="user">Owner:</label>
+                        <input type="owner" id="owner" name="owner" placeholder="Owner of lot" required readonly="true"/>
+                    </div>
+
+                    <div class="form_control">
+                        <label for="activitytype">Chosen activity:</label>
+                        <input type="activity" id="activity" name="activity" placeholder="Chosen activity" required readonly="true"/>
+                    </div>
+
+                    <script>
+                        function getUrlParameter(name) {
+                            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                            var results = regex.exec(location.search);
+                            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+                        }
+
+                        // Retrieve values
+                        var userID = getUrlParameter('userID');
+                        var lotID = getUrlParameter('lotID');
+                        var activity = getUrlParameter('activity');
+
+                        var lotInput = document.getElementById('lot');
+                        lotInput.value = lotID;
+                        var ownerInput = document.getElementById('owner');
+                        ownerInput.value = userID;
+                        var actInput = document.getElementById('activity');
+                        actInput.value = activity;
+
+                        // Log the values
+                        console.log('userID:', userID);
+                        console.log('lotID:', lotID);
+                        console.log('activity:', activity);
+                    </script>
+
+                    <div class="form_control">
+                    <legend>
+                        Select Start Time: 
+                        <input type="time" name="stime">
+                    </legend>
                     </div>
 
 
@@ -78,6 +117,13 @@
                         <label for="date">Date of event:</label>
                         <input value="" type="date" id="date" name="date" />
                     </div>
+
+                    <div class="form_control">
+                        <legend>
+                            Select End Time:   
+                            <input type="time" name="etime">
+                        </legend>
+                        </div>
 
                 </div>
 

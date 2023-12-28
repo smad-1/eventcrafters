@@ -21,7 +21,8 @@
         
                 <input type="email" name="username" class="input-field" placeholder="username"/>
                 <input type="password" name="password" class="input-field" placeholder="password"/>
-                <input type="submit" class="btn" value="LOGIN">
+                <input type="submit" class="btn" value="LOGIN"> 
+                <!-- <button onclick="redirect()">Login</button> -->
                 <label>Not a user? </label>
                 <a href="/views/registration.html" class="btn_register">Register</a>
 
@@ -29,6 +30,14 @@
               
             </form>
         </div>
+        <script>
+            function redirect() {
+                const selectedOption = document.getElementById('username');
+      // Redirect to another HTML file with the selected userID and lotID
+                window.location.href = `/views/welcome.html`;
+
+    }
+        </script>
     </section>
 </body>
 </html>

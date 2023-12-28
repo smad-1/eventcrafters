@@ -6,28 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <link rel="stylesheet" href="/assets/welcome.css" >
-    
+
 </head>
 <body>
     <nav>
-      
       <label class="logo">Event Crafters</label>
+      
       <ul>
         <li><a class="active" href="/views/welcome.html">Home</a></li>
         <li><a href="/views/aboutus.html">About</a></li>
-        <li class="dropdown">
-            <a href="/views/welcome.html">Services</a>
-            <ul class="dropdown-content">
+        <li class="dropdown" id="service">
+            <a href="#">Services</a>
+            <!--<ul class="dropdown-content">
                 <li><a href="/views/rentplace.html">Rent a place</a></li>
-                <li><a href="/views/bookplace.html">Book a place</a></li>
+                <li><a href="/views/showlots.html">Book a place</a></li> 
                 <li><a href="/views/birthday_page.html">Decor</a></li>
                 <li><a href="/views/Payment.html">Payment</a></li>
-            </ul>
+            </ul>-->
         </li>
         <li><a href="/views/decor.html">Events</a></li>
-        <li><a href="#">Contact</a></li>
+        <li class="dropdown" id="user">
+            <a href="/views/welcome.html"></a>
+            <ul class="dropdown-content">
+                <li><a href="/views/mylots.html">Your Lots</a></li>
+                <li><a href="/views/mybookings.html">Your Bookings</a></li> 
+                <li><a href="#">Your Requests</a></li>
+                <li><a href="#">Your Payments</a></li>
+            </ul>
+        </li>
         <li><a href="/views/feedback.html">Feedback</a></li>
+        <script>
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+        
+            var username = getUrlParameter('username');
+            var userID = getUrlParameter('userID');
+           
+            var userListItem = document.getElementById('user');
+            userListItem.innerHTML = `<a href="#">${username}</a>
+            <ul class="dropdown-content">
+                <li><a href="/views/mylots.html?userID=${userID}">Your Lots</a></li>
+                <li><a href="/views/mybookings.html?userID=${userID}">Your Bookings</a></li> <!-- ekhane cng-->
+                <li><a href="/views/myrequests.html?userID=${userID}">Your Requests</a></li>
+                <li><a href="#">Your Payments</a></li>
+            </ul>`;
+
+            var serviceItem = document.getElementById('service');
+            serviceItem.innerHTML = `<a href="/views/services.html?userID=${userID}">Services</a>`;
+        
+        </script>
       </ul>
+
+      
     </nav>
 
     <!-- BODY -->
