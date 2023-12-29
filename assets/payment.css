@@ -1,99 +1,134 @@
-body {
-    font-family: Arial, sans-serif;
+*{
     margin: 0;
     padding: 0;
-    background-image: url('/assets/images/bg1.jpg'); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    box-sizing: border-box;
+}
 
+body {
+    background-image: url(./images/bg1.jpg);
+    background-repeat: no-repeat; /* This will prevent the image from repeating */
+    background-size: cover; /* This will make the image cover the entire area */
+    background-attachment: fixed; /* Optional: This makes the background fixed during scroll */
+}
+.container{
+    max-width: 900px;
+    margin: 0 auto;
     
 }
 
-.sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+.apply_box {
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); /* White background with 50% opacity */
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 4px 3px 5px rgba(1, 1, 1, 0.1);
+    border-radius: 10px;
+}
+
+
+.title_small{
+    font-size: 20px;
+    
+}
+
+.form_container{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.form_control{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.sidenav a {
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    margin: 10px 0;
-}
-
-.sidenav a:hover {
-    background-color: #555;
-}
-
-
-.content {
-    margin-left: 260px;
-    padding: 20px;
-    color: rgb(255, 255, 255);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-
-.form-section {
-    margin-bottom: 20px;
-    width: 48%; 
-}
-
-
-label {
-    display: block;
+label{
+    font-size: 15px;
     margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="tel"],
-input[type="radio"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
+input, select, textarea{
+    padding: 6px 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 15px;
 }
 
-
-.credit-card-fields {
-    display: none; 
+input:focus, textarea:focus{
+    outline-color: #5891bd;
 }
 
-
-.bkash-number-field {
-    display: none; 
+.button{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-
-input[type="radio"] {
-    margin-right: 5px;
+button{
+    background-color: #440f3c;
+    border: transparent solid 2px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: white;
+    transition: 0.3s ease-in;
 }
 
-
-.submit-button {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+button:hover{
+    background-color: #5e0755;
+    border: 2px solid  rgb(197, 94, 94);
+    color: white;
+    transition: 0.3s ease-out;
     cursor: pointer;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+}
+
+.textarea_control{
+    grid-column: 1 / span 2;
+}
+
+.textarea_control textarea{
+    width: 100%;
+}
+
+@media (max-width: 460px){
+    .textarea_control{
+        grid-column: 1 / span 1;
+    }
+}
+.sidebar {
+    height: 100%;
+    width: 200px; /* Width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically in flexbox */
+    align-items: center; /* Center items horizontally in flexbox */
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    width: 100%; /* Full width */
+    text-align: center; /* Center text horizontally */
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+/* Style adjustments for smaller screens */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
 }
