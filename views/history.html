@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .half {
+            width: 50%;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .left-half {
+            background: rgb(0, 0, 0);
+            background-image: url(../assets/images/history1.jpg);
+        }
+
+        .right-half {
+            background: white;
+            background-image: url(../assets/images/history2.jpg);
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #000000; 
+        }
+
+        p {
+            font-size: 18px; 
+            color: #000000; 
+            padding: 0 20px; 
+            text-align: center;
+        }
+
+        .half button {
+            padding: 15px 30px;
+            margin: 20px;
+            font-size: 20px; 
+            border-radius: 0px;
+            cursor: pointer;
+            border: black;
+            border-width: 5px;
+        }
+
+        .left-half button {
+            background-color: #fff;
+            color: rgb(0, 0, 0);
+        }
+
+        .right-half button {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="half left-half">
+        <h1 style="color: #fff;">As Owner</h1>
+        <p style="color: #fff;">View how many times and who have reserved your lots for their functions. Happy memories!</p>
+        <button id="leftButton">History</button>
+    </div>
+    <div class="half right-half">
+        <h1 style="color:  rgb(0, 0, 0);">As Customer</h1>
+        <p style="color:  rgb(0, 0, 0);">Check the lots you have booked and the services you checked in for. Enjoy your event!</p>
+        <button id="rightButton">History</button>
+    </div>
+</body>
+</html>
