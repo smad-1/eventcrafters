@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catering</title>
     <style>
-      
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,7 +13,7 @@
             background-size: 400% 400%;
             animation: gradient 3s linear infinite;
         }
-    
+
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -27,101 +26,113 @@
             }
         }
 
-      
         #content {
             padding: 20px;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .decor-container {
             display: flex;
-            flex-direction: row; 
-            justify-content: center;
+            flex-direction: column; 
             align-items: center;
             margin: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         .decor-image {
-            width: 400px; 
-            height: 400px; 
+            width: 200px; 
+            height: 100px; 
             object-fit: cover; 
-            margin-right: 20px; 
+        }
+
+        .decor-image:hover {
+            transform: scale(1.1); 
         }
 
         .decor-details {
             color: #fff; 
-            text-align: left; 
+            text-align: center; 
+            padding: 10px;
         }
 
-       
-        #decor-type-container {
-            width: 100%;
-            padding: 20px 0;
-        }
-
-        #decor-type-heading {
-            font-size: 24px;
-            text-align: center;
-            color: #fff; 
-        }
         .skip-button {
-          
-          bottom: 100px;
-          padding: 10px 20px;
-          margin: 25px;
-          margin-left: 35px;
-          background-color: #9b5b00;
-          color: rgb(255, 255, 255);
-          border: white;
-          border-radius: 5px;
-          font-size: 16px;
-      }
-      .skip-button:hover {
-          transform: scale(1.3); 
-      }
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            padding: 10px 20px;
+            background-color: #9b5b00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .skip-button:hover {
+            transform: scale(1.5); 
+        }
     </style>
 </head>
 <body>
   
     <div id="content">
         <div class="decor-container">
+            
             <img class="decor-image" src="../assets/images/catering1.jpg" alt="Catering 1">
+            <img class="decor-image" src="../assets/images/catering2.jpg" alt="Catering 1">
+            <img class="decor-image" src="../assets/images/catering3.jpg" alt="Catering 1">
             <div class="decor-details">
-               <h2>Indian Cuisine</h2>
-                <p>Catering ID: C1</p>
+             
+                <h2>Catering ID: C1</h2>
                 <ul>
-                    <li>Basmati rice - 150/plate</li>      
-                    <li>Roast - 30/piece</li>
-                    <li>Fish fillet - 15/pice</li>
-                    <li>Gravy beef - 400/plate</li>
+                    <li>Indian Cuisine- 340/plate</li>      
+                    <li>Chinese Cuisine - 400/plate</li>
+                    <li>Italian Cuisine - 500/plate</li>
+                  
                 </ul>
      
             </div>
         </div>
         <div class="decor-container">
-            <img class="decor-image" src="../assets/images/catering2.jpg" alt="Catering 2">
+            <img class="decor-image" src="../assets/images/catering5.jpg" alt="Catering 2">
+            <img class="decor-image" src="../assets/images/catering6.jpg" alt="Catering 2">
+            <img class="decor-image" src="../assets/images/catering7.jpg" alt="Catering 2">
             <div class="decor-details">
-                <h2>Chinese Cuisine</h2>
-                <p>Catering ID: C2</p>
+               
+                <h2>Catering ID: C2</h2>
                 <ul>
-                    <li>Fried rice - 150/plate</li>      
-                    <li>Chicken fry - 30/piece</li>
-                    <li>Wonton - 10/piece</li>
-                    <li>Sizzling - 350/plate</li>
+                    <li>French Cuisine - 430/plate</li>      
+                    <li>Continental - 370/plate</li>
+                    <li>Chinese Cuisine- 520/plate</li>
+                   
                 </ul>
      
             </div>
         </div>
         <div class="decor-container">
-            <img class="decor-image" src="../assets/images/catering3.jpg" alt="Catering 3">
+            <div class="image-container">
+            <img class="decor-image" src="../assets/images/catering8.jpg" alt="Catering 3">
+        </div>
+            <img class="decor-image" src="../assets/images/catering9.jpg" alt="Catering 3">
+            <img class="decor-image" src="../assets/images/catering10.jpg" alt="Catering 3">
+
             <div class="decor-details">
-                <h2>Italian Cuisine</h2>
-                <p>Catering ID: C3</p>
+            
+                <h2>Catering ID: C3</h2>
                 <ul>
-                    <li>Pizza - 150/plate</li>      
-                    <li>Spaghetti - 180/plate</li>
-                    <li>Carbonnara- 200/plate</li>
+                    <li>Turkish Cuisine- 550/plate</li>      
+                    <li>Bangladeshi Cuisine - 290/plate</li>
+                    <li>American Cuisine - 200/plate</li>
                 </ul>
             </div>
         </div>
