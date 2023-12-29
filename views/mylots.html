@@ -128,8 +128,8 @@ body {
             <strong>Region:</strong> ${item.Area}<br>
             <strong>Address:</strong> ${item.Address}<br>
             
-            <button class="butn">Update</button>
-            <button class="butn">Delete</button>
+            <button class="butn" onclick="updateData(${item.userID}, ${item.lotID}, '${item.First_name}', '${item.Last_name}',  '${item.Phone_no}', '${item.Email}', '${item.Lot_Name}', ${item.Capacity}, '${item.Area}', '${item.Address}', '${item.Extra_info}')">Update</button>
+            <button class="butn" onclick="deleteData(${item.userID}, ${item.lotID})">Delete</button>
             </div>    
         </div>
        
@@ -139,13 +139,35 @@ body {
       }
     }
 
-      async function rentNow(useriD, lotID, act) {
-        const selectedOption = document.getElementById(act);
-        const selectedText = selectedOption.options[selectedOption.value].text;
-      // Redirect to another HTML file with the selected userID and lotID
-      window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}&activity=${selectedText}`;
+      async function updateData(useriD, lotID, fname, lname, phone, mail, lotName, cap, area, add, info) {
+        
+        window.location.href = `/views/updateform.html?userID=${useriD}&lotID=${lotID}&f=${fname}&lname=${lname}&phone=${phone}&mail=${mail}&lot=${lotName}&cap=${cap}&area=${area}&add=${add}&info=${info}`;
+     
+      }
 
-    }
+      async function deleteData(useriD, lotID) {
+        await fetch('/deletelot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userID: useriD,
+                    lotID: lotID
+                }),
+
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert("inside alert");
+                    console.log(result.message);
+                })
+                .catch(error => console.error('Error deleting task:', error));
+                
+                
+                window.location.href(`/views/mylots.html?userID=${useriD}`);
+      }
+
   </script>
 </body>
 </html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a place</title>
+    <script src="multiselect-dropdown.js"></script>
+    <link rel="stylesheet" href="/assets/rentform.css" class="css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="apply_box">
+
+            <h1>Update Rental Application</h1>
+
+            <form action="/updatelot" method="POST">
+                <div class="form_container">
+                    <div class="form_control">
+                        <label for="first_name">First Name:</label>
+                        <input id="first_name" name="first_name" required
+                            readonly="true" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="last_name">Last Name:</label>
+                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required readonly="true" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="number">Phone number:</label>
+                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="lotname">Lot name:</label>
+                        <input type="text" id="lotname" name="lotname" placeholder="Enter Lot Name" required
+                            readonly="true" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="capacity">Capacity:</label>
+                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required />
+                    </div>
+
+
+                    <div class="form_control">
+                        <label>Activities:</label><br>
+
+                        <label>
+                            <input type="checkbox" id="bday" name="activity" value="Birthday"> Birthday Party
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="wedding" name="activity" value="Wedding"> Wedding
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="picnic" name="activity" value="Picnic"> Picnic
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="babyshower" name="activity" value="Baby Shower"> Baby Shower
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="conference" name="activity" value="Conference"> Conference
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="celebration" name="activity" value="Celebration"> Celebration
+                            Party
+                        </label><br>
+                        <label>
+                            <input type="checkbox" id="formal" name="activity" value="Formal"> Formal Gathering
+                        </label><br>
+
+                        <input type="hidden" name="activity" value="null" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="area">Area:</label>
+                        <input type="area" id="area" name="area" placeholder="Area" required readonly="true" />
+                    </div>
+
+                    <div class="textarea_control">
+                        <label for="address">Address:</label>
+                        <textarea name="address" id="address" cols="50" rows="4" placeholder="Enter address"
+                            readonly="true"></textarea>
+                    </div>
+
+                    <div class="textarea_control">
+                        <label for="info">Extra Information:</label>
+                        <textarea name="info" id="info" cols="50" rows="4" placeholder="Write something..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="button">
+                    <button type="submit" onclick="submitting()">Update</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Retrieve values
+     
+
+        var fname = document.getElementById('first_name');
+        fname.value = getUrlParameter('f');
+        var lname = document.getElementById('last_name');
+        lname.value = getUrlParameter('lname');
+        var mail = document.getElementById('email');
+        mail.value = getUrlParameter('mail');
+        var phone = document.getElementById('number');
+        phone.value = getUrlParameter('phone');
+        var lotName = document.getElementById('lotname');
+        lotName.value = getUrlParameter('lot');
+        var cap = document.getElementById('capacity');
+        cap.value = getUrlParameter('cap');
+        var area = document.getElementById('area');
+        area.value = getUrlParameter('area');
+        var add = document.getElementById('address');
+        address.value = getUrlParameter('add');
+        var info = document.getElementById('info');
+        info.value = getUrlParameter('info');
+
+        async function submitting() {
+
+            await fetch('/updatelot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userID: getUrlParameter('userID'),
+                    lotID: getUrlParameter('lotID')
+                }),
+
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert("inside alert");
+                    console.log(result.message);
+                })
+                .catch(error => console.error('Error deleting task:', error));
+
+            //window.location.href = `/views/feedback.html?ownerID=${ownerID}&lotID=${lotID}&customerID=${customerID}`;
+        }
+
+    </script>
+
+</body>
+
+</html>
