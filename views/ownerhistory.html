@@ -133,7 +133,7 @@ body {
                     deets.style.backgroundColor = 'black';
         
                     deets.innerText = 'Show Details';
-                    deets.addEventListener('click', () => history(item.owner));
+                    deets.addEventListener('click', () => history(item.reservationID));
                 }
 
 
@@ -148,6 +148,9 @@ body {
                 <li><b>Staring time: </b>${item.startTime}</li> <!-- ekhane cng-->
                 <li><b>Customer's contact: </b> ${item.Phone_no}</li>
                 <li><b>Customer's email: </b> ${item.Email}</li>
+                <li><b>Payment Method: </b> ${item.pay}</li>
+                <li><b>Paid On: </b> ${item.paidon}</li>
+                <li><b>Paid amount: </b> ${item.amnt}</li>
               </ul>
               
             </div>
@@ -170,11 +173,10 @@ body {
 
       }
 
-      async function rentNow(useriD, lotID) {
-        const selectedOption = document.getElementById(act);
-        const selectedText = selectedOption.options[selectedOption.value].text;
+      async function history(RID) {
+       
       // Redirect to another HTML file with the selected userID and lotID
-        window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+        window.location.href = `/views/bill.html?reservationID=${RID}`;
 
       }
 

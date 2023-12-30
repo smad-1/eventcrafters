@@ -34,7 +34,7 @@
                 <li><a href="#">Your Payments</a></li>
             </ul>
         </li>
-        <li><a href="/views/feedback.html">Feedback</a></li>
+        <li id="feedback"><a href="/views/feedback.html">Feedback</a></li>
         <li><a href="/">Log out</a></li>
         <script>
             function getUrlParameter(name) {
@@ -58,6 +58,9 @@
 
             var serviceItem = document.getElementById('service');
             serviceItem.innerHTML = `<a href="/views/services.html?userID=${userID}">Services</a>`;
+
+            var feedback = document.getElementById('feedback');
+            feedback.innerHTML = `<a href="/views/events.html?userID=${userID}">Feedback</a>`;
         
         </script>
       </ul>

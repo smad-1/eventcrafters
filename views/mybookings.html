@@ -61,6 +61,7 @@ body {
 
   button{
     margin-left: 20px;
+    
   padding: 10px;
   color: #fff; /* White text color */
   border: none;
@@ -113,7 +114,9 @@ body {
           const listItem = document.createElement('div');
 
           const buttonElement = document.createElement('button');
+          const sumButton = document.createElement('button');
           buttonElement.id = `button_${item.customerID}`;
+          sumButton.id = `button_${item.reservationID}`;
                 // Update button color and text based on the received data
                 if (item.state == 'requested') {
                     buttonElement.style.backgroundColor = 'red';
@@ -127,6 +130,9 @@ body {
                     buttonElement.style.backgroundColor = 'green';
                     buttonElement.innerText = 'Paid';
                 }
+              sumButton.style.backgroundColor = 'black';
+              sumButton.innerText = 'Booking Summary';
+              sumButton.addEventListener('click', () => summary(item.reservationID));
 
           listItem.innerHTML = `
           <div class="card">
@@ -148,6 +154,7 @@ body {
         </div>
         `;
           listItem.appendChild(buttonElement);
+          listItem.appendChild(sumButton);
           container.appendChild(listItem);
         }
       }
@@ -180,6 +187,11 @@ body {
         const selectedText = selectedOption.options[selectedOption.value].text;
       // Redirect to another HTML file with the selected userID and lotID
       window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+
+    }
+    async function summary(RID)
+    {
+      window.location.href = `/views/bill.html?reservationID=${RID}`;
 
     }
   </script>

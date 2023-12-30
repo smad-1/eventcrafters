@@ -113,6 +113,7 @@ body {
           const listItem = document.createElement('div');
 
           const buttonElement = document.createElement('button');
+          const deets = document.createElement('button');
           buttonElement.id = `button_${item.customerID}`;
                 // Update button color and text based on the received data
                 if (item.state == 'requested') {
@@ -127,6 +128,13 @@ body {
                     buttonElement.style.backgroundColor = 'green';
                     buttonElement.innerText = 'Paid';
                 }
+                deets.id = `button_paid_${item.reservationID}`;
+                    buttonElement.style.backgroundColor = 'green';
+                    buttonElement.innerText = 'Paid';
+                    deets.style.backgroundColor = 'black';
+        
+                    deets.innerText = 'Show Details';
+                    deets.addEventListener('click', () => history(item.reservationID));
 
           listItem.innerHTML = `
           <div class="card">
@@ -142,12 +150,16 @@ body {
                 <li><b>Owner's email: </b> ${item.Email}</li>
                 <li><b>Catering service: </b>${item.catering}</li>
                 <li><b>Decor service: </b>${item.decor}</li>
+                <li><b>Payment Method: </b> ${item.pay}</li>
+                <li><b>Paid On: </b> ${item.paidon}</li>
+                <li><b>Paid amount: </b> ${item.amnt}</li>
               </ul>
               
             </div>
         </div>
         `;
           listItem.appendChild(buttonElement);
+          listItem.appendChild(deets);
           container.appendChild(listItem);
         }
       }
@@ -182,6 +194,13 @@ body {
       window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
 
     }
+
+    async function history(RID) {
+       
+       // Redirect to another HTML file with the selected userID and lotID
+         window.location.href = `/views/bill.html?reservationID=${RID}`;
+ 
+       }
   </script>
 </body>
 </html>

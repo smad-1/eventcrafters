@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Requests</title>
 
   <style>
-
     * {
-  margin: 0;
-  padding: 0;
-}
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    align-items: center;
-    text-align: center;
-    background-color: #440f3c;
-  }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      align-items: center;
+      text-align: center;
+      background-color: #440f3c;
+    }
 
-  .top{
-    margin-top: 50px;
-    font-size: 50px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-  }
+    .top {
+      margin-top: 50px;
+      font-size: 50px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+    }
 
-  .description{
-    margin: 20px;
-    margin-left: 0px;
-    margin-bottom: 30px;
-  }
+    .description {
+      margin: 20px;
+      margin-left: 0px;
+      margin-bottom: 30px;
+    }
 
-  .type{
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
+    .type {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
 
-  .dropdown-content{
-    margin-left: 25px;
-  }
+    .dropdown-content {
+      margin-left: 25px;
+    }
 
-  li{
-    margin-bottom: 5px;
-  }
-  
-  #data-container {
-    text-align: left;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    li {
+      margin-bottom: 5px;
+    }
 
-  button{
-    margin-left: 20px;
-    margin-bottom: 30px;
-  padding: 10px;
-  color: #fff; /* White text color */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 150px;
-  }
+    #data-container {
+      text-align: left;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 25px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-
+    button {
+      margin-left: 20px;
+      margin-bottom: 30px;
+      padding: 10px;
+      color: #fff;
+      /* White text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 150px;
+    }
   </style>
 </head>
+
 <body>
   <div class="top">My Requests</div>
 
@@ -81,63 +81,63 @@ body {
     document.addEventListener('DOMContentLoaded', fetchData);
 
     function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-
-        //var username = getUrlParameter('username');
-        //var userID = getUrlParameter('userID');
-
-    async function fetchData() {
-        try {
-            var userID = getUrlParameter('userID');
-          const response = await fetch(`http://localhost:5005/myrequests?userID=${userID}`);
-          const data = await response.json();
-          console.log(data);
-          displayData(data);
-        } catch (error) {
-          console.error('Error fetching data: ', error);
-        }
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-      async function displayData(data) {
+    //var username = getUrlParameter('username');
+    //var userID = getUrlParameter('userID');
+
+    async function fetchData() {
+      try {
+        var userID = getUrlParameter('userID');
+        const response = await fetch(`http://localhost:5005/myrequests?userID=${userID}`);
+        const data = await response.json();
+        console.log(data);
+        displayData(data);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    }
+
+    async function displayData(data) {
       const container = document.getElementById('data-container');
       let num = 0;
 
       for (const item of data) {
-          var paid = 0;
-          const listItem = document.createElement('div');
+        var paid = 0;
+        const listItem = document.createElement('div');
 
-          const buttonElement = document.createElement('button');
-          const deets = document.createElement('button');
-          buttonElement.id = `button_${item.reservationID}`;
-                // Update button color and text based on the received data
-                if (item.state == 'requested') {
-                    buttonElement.style.backgroundColor = 'yellow';
-                    buttonElement.style.color = 'black';
-                    buttonElement.innerText = 'Approve?';
-                    buttonElement.addEventListener('click', () => handleApproveButtonClick(item.reservationID));
+        const buttonElement = document.createElement('button');
+        const deets = document.createElement('button');
+        const sumButton = document.createElement('button');
+        buttonElement.id = `button_${item.reservationID}`;
+        // Update button color and text based on the received data
+        if (item.state == 'requested') {
+          buttonElement.style.backgroundColor = 'yellow';
+          buttonElement.style.color = 'black';
+          buttonElement.innerText = 'Approve?';
+          buttonElement.addEventListener('click', () => handleApproveButtonClick(item.reservationID));
 
-                } else if (item.state == 'approved') {
-                    buttonElement.style.backgroundColor = 'red';
-                    buttonElement.innerText = 'Not Paid';
-                }
-                else 
-                {
-                    paid = 1;
-                    deets.id = `button_paid_${item.reservationID}`;
-                    buttonElement.style.backgroundColor = 'green';
-                    buttonElement.innerText = 'Paid';
-                    deets.style.backgroundColor = 'black';
-        
-                    deets.innerText = 'Show Details';
-                    deets.addEventListener('click', () => history(item.owner));
-                }
+        } else if (item.state == 'approved') {
+          buttonElement.style.backgroundColor = 'red';
+          buttonElement.innerText = 'Not Paid';
+        }
+        else {
+          paid = 1;
+          deets.id = `button_paid_${item.reservationID}`;
+          buttonElement.style.backgroundColor = 'green';
+          buttonElement.innerText = 'Paid';
+          deets.style.backgroundColor = 'black';
+
+          deets.innerText = 'Show Details';
+          deets.addEventListener('click', () => history(item.owner));
+        }
 
 
-          listItem.innerHTML = `
+        listItem.innerHTML = `
           <div class="card">
             <strong>Lot ID </strong>: ${item.lot} <br>
             <strong>Customer ID </strong>: ${item.customerID} <br> 
@@ -152,37 +152,51 @@ body {
               
             </div>
         </div>`;
-            
-            listItem.appendChild(buttonElement);
-            if(paid === 1) 
-            {
-              listItem.appendChild(deets);
-            }
-            container.appendChild(listItem);
+
+        listItem.appendChild(buttonElement);
+        if (paid === 1) {
+          listItem.appendChild(deets);
         }
+        else {
+          sumButton.id = `button_${item.reservationID}`;
+          sumButton.style.backgroundColor = 'black';
+          sumButton.innerText = 'Booking Summary';
+          sumButton.addEventListener('click', () => summary(item.reservationID));
+          listItem.appendChild(sumButton);
+
+
+        }
+        container.appendChild(listItem);
       }
+    }
 
-       function handleApproveButtonClick(RID) {
-         fetch(`/updatetoApproved?reservationID=${RID}`);
-        const btn = document.getElementById(`button_${RID}`);
-        btn.style.backgroundColor = 'red';
-        btn.innerText = 'Not Paid';
+    function handleApproveButtonClick(RID) {
+      fetch(`/updatetoApproved?reservationID=${RID}`);
+      const btn = document.getElementById(`button_${RID}`);
+      btn.style.backgroundColor = 'red';
+      btn.innerText = 'Not Paid';
 
-      }
+    }
 
-      async function rentNow(useriD, lotID) {
-        const selectedOption = document.getElementById(act);
-        const selectedText = selectedOption.options[selectedOption.value].text;
+    async function rentNow(useriD, lotID) {
+      const selectedOption = document.getElementById(act);
+      const selectedText = selectedOption.options[selectedOption.value].text;
       // Redirect to another HTML file with the selected userID and lotID
-        window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+      window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
 
-      }
+    }
 
-      async function history(useriD) {
-      
-        window.location.href = `/views/history.html?userID=${useriD}`;
+    async function history(useriD) {
 
-      }
+      window.location.href = `/views/history.html?userID=${useriD}`;
+
+    }
+
+    async function summary(RID) {
+      window.location.href = `/views/bill.html?reservationID=${RID}`;
+
+    }
   </script>
 </body>
+
 </html>

@@ -168,7 +168,9 @@ app.get('/views/ownerhistory.html', (req, res) => {
 app.get('/views/customerhistory.html', (req, res) => {
   res.sendFile(__dirname + '/views/customerhistory.html');
 });
-
+app.get('/views/bill.html', (req, res) => {
+  res.sendFile(__dirname + '/views/bill.html');
+});
 
 //set app port
 
@@ -250,7 +252,10 @@ app.get('/mybookings', (req, res) => {
 app.get('/myrequests', (req, res) => {
   const { userID } = req.query;
   // Fetch data from the database
-  const query = 'SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state FROM reservations, rentlots WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND reservations.userID = ?';
+  const query = `SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, 
+  activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state 
+  FROM reservations, rentlots WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND 
+  reservations.userID = ?`;
   conn.query(query, [userID], (err, results) => {
     if (err) throw err;
     console.log(results);
@@ -261,7 +266,11 @@ app.get('/myrequests', (req, res) => {
 app.get('/ownerhistory', (req, res) => {
   const { userID } = req.query;
   // Fetch data from the database
-  const query = 'SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state FROM reservations, rentlots WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND reservations.userID = ? AND state = "paid"';
+  const query = `SELECT distinct reservations.reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, 
+  eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, reservations.Phone_no, reservations.Email, state, 
+  payment.method as pay, payment.paymentdate as paidon, payment.amount as amnt FROM reservations, rentlots, payment 
+  WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND reservations.userID = ? AND 
+  state = "paid" AND payment.reservationID=reservations.reservationID'`;
   conn.query(query, [userID], (err, results) => {
     if (err) throw err;
     console.log(results);
@@ -272,7 +281,7 @@ app.get('/ownerhistory', (req, res) => {
 app.get('/customerhistory', (req, res) => {
   const { userID } = req.query;
   // Fetch data from the database
-  const query = 'SELECT distinct reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, rentlots.Phone_no, rentlots.Email, state FROM reservations, rentlots WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND customerID = ? AND state="paid"';
+  const query = 'SELECT distinct reservations.reservationID, reservations.lotID as lot, customerID, reservations.userID as owner, eventDate, activityID, startTime, endTime, catering, decor, Numberofpeople, rentlots.Phone_no, rentlots.Email, state, payment.method as pay, payment.paymentdate as paidon, payment.amount as amnt FROM reservations, rentlots, payment WHERE reservations.userID = rentlots.userID AND rentlots.lotID = reservations.lotID AND customerID = ? AND state="paid" AND payment.reservationID=reservations.reservationID';
   conn.query(query, [userID], (err, results) => {
     if (err) throw err;
     console.log(results);
@@ -339,6 +348,22 @@ app.get('/capanddate', (req, res) => {
   });
 });
 
+app.get('/bills', (req, res) => {
+  const { resID } = req.query;
+
+  query = `select reservations.lotID, customerID, reservations.userID, eventDate, numberofpeople, startTime, endTime, activityID, state,
+   reservations.type as restype, decor, catering, calculateHours(${resID}) as hours, 
+  rentlots.price as lotprice, calculateDecor(${resID}) as decorPrice, catering.price as catprice, calculateCatering(${resID}) 
+  as totalcat from reservations, rentlots, catering where reservationID = ? AND reservations.userID = rentlots.userID
+   AND reservations.lotID = rentlots.lotID AND reservations.catering = catering.cateringID AND reservations.type = catering.type `;
+  conn.query(query, [resID], (err, results) => {
+    if (err) throw err;
+    console.log(results);
+    res.json(results);
+  });
+
+});
+
 class payment {
   static lot;
   static owner;
@@ -401,7 +426,7 @@ app.post('/feedback', encoder, function (req, res) {
   else {
     console.log(req.body.rating + " " + req.body.ownerID + " " + req.body.lotID + " " + req.body.customerID + " " + req.body.description)
     user.curr_user = req.body.customerID
-    const query = 'select user_name from user where user_ID = ?';
+    var query = 'select user_name from user where user_ID = ?';
     conn.query(query, [user.curr_user], function (error, results, fields) {
       if (results.length > 0) {
         //res.redirect("/views/welcome.html")
@@ -606,9 +631,11 @@ app.post('/bookplace', encoder, function (req, res) {
     else console.log("Successful submission");
   });
 
-  //res.redirect("/views/welcome.html" + `?userID=${user.curr_user}&username=${user.curr_name}`);
+  
 
-  //res.end();
+  res.redirect("/views/welcome.html" + `?userID=${user.curr_user}&username=${user.curr_name}`);
+
+  res.end();
 
 });
 

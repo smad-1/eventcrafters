@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="button">
-                    <button type="submit" onclick="submitting()">Submit</button>
+                    <button type="submit">Submit</button>
                 </div>
 
             </form>
@@ -155,26 +155,8 @@
         const cap = document.getElementById('capacity').value;
         var datee = document.getElementById('date').value;
 
-        async function submitting() {
-            var val;
-
-            try {
-                const resp = await fetch(`http://localhost:5005/capanddate?userID=${userID}&lotID=${lotID}`);
-                const amount = await resp.json();
-
-                for (const itm of amount) {
-                    val = itm.capacity;
-                }
-
-                if(val < document.getElementById('capacity').value) 
-                {
-                    alert("Too many people. Maximum capacity is " + val + " people. Please reload the page.");
-                }
-
-            } catch (error) {
-                console.error('Error fetching data: ', error);
-            } 
-
+        async function changepage() {
+            
             const resp = fetch(`http://localhost:5005/getname?userID=${custID}`);
             const usrname = resp.json();
             var name;
@@ -185,6 +167,8 @@
             window.location.href= `/views/welcome.html?userID=${custID}&username=${name}`;
 
         }
+
+        changepage();
       
 
     </script>
