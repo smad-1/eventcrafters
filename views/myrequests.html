@@ -107,9 +107,11 @@ body {
       let num = 0;
 
       for (const item of data) {
+          var paid = 0;
           const listItem = document.createElement('div');
 
           const buttonElement = document.createElement('button');
+          const deets = document.createElement('button');
           buttonElement.id = `button_${item.reservationID}`;
                 // Update button color and text based on the received data
                 if (item.state == 'requested') {
@@ -124,8 +126,14 @@ body {
                 }
                 else 
                 {
+                    paid = 1;
+                    deets.id = `button_paid_${item.reservationID}`;
                     buttonElement.style.backgroundColor = 'green';
                     buttonElement.innerText = 'Paid';
+                    deets.style.backgroundColor = 'black';
+        
+                    deets.innerText = 'Show Details';
+                    deets.addEventListener('click', () => history(item.owner));
                 }
 
 
@@ -144,8 +152,13 @@ body {
               
             </div>
         </div>`;
+            
             listItem.appendChild(buttonElement);
-          container.appendChild(listItem);
+            if(paid === 1) 
+            {
+              listItem.appendChild(deets);
+            }
+            container.appendChild(listItem);
         }
       }
 
@@ -155,15 +168,21 @@ body {
         btn.style.backgroundColor = 'red';
         btn.innerText = 'Not Paid';
 
-    }
+      }
 
       async function rentNow(useriD, lotID) {
         const selectedOption = document.getElementById(act);
         const selectedText = selectedOption.options[selectedOption.value].text;
       // Redirect to another HTML file with the selected userID and lotID
-      window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+        window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
 
-    }
+      }
+
+      async function history(useriD) {
+      
+        window.location.href = `/views/history.html?userID=${useriD}`;
+
+      }
   </script>
 </body>
 </html>

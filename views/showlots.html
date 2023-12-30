@@ -12,8 +12,7 @@
 
   <div class="top">Available Lots</div><br>
 
-  <div id="data-container">
-    
+  <div>
     <button class="sort" onclick="toggleSorting('price')">Sort by Price</button>
     <button class="sort" onclick="toggleSorting('capacity')">Sort by Capacity</button>
 
@@ -25,7 +24,10 @@
       <option value="Banani">Banani</option>
       <option value="Bailey Road">Bailey Road</option>
     </select>
+  </div>
 
+  <div id="data-container">
+    
   </div>
 
   <script>
@@ -39,6 +41,7 @@
     }
 
     var iduser = getUrlParameter('userID');
+    var event = getUrlParameter('event');
     let priceSorting = false;
     let capacitySorting = false;
 
@@ -58,7 +61,7 @@
         const areaSelect = document.getElementById('areaSelect');
         const selectedArea = areaSelect.value;
 
-        const response = await fetch(`http://localhost:5005/lots?userID=${iduser}&area=${selectedArea}&price=${priceSorting}&capacity=${capacitySorting}`);
+        const response = await fetch(`http://localhost:5005/lots?userID=${iduser}&area=${selectedArea}&price=${priceSorting}&capacity=${capacitySorting}&event=${event}`);
         const data = await response.json();
         console.log("here please");
         console.log(data);
@@ -81,6 +84,7 @@
 
     async function displayData(data) {
       const container = document.getElementById('data-container');
+      container.innerHTML = "";
       let num = 0;
 
       for (const item of data) {
@@ -100,6 +104,7 @@
           selectBox.appendChild(option);
           i++;
         });
+        
 
         listItem.innerHTML = `<div class="inside">
       <strong>Lot ID:</strong> ${item.lotID} <br>
@@ -109,7 +114,7 @@
       <strong>Email: </strong> ${item.Email} <br>
       <button class="btn" onclick="rentNow('${item.userID}', '${item.lotID}', '${selectBox.id}')">Rent Now</button>
       <button class="btn" onclick="feedbacc('${item.userID}', '${item.lotID}')">Feedback</button>
-      <label for="choices">Select a choice:</label>
+      <label for="choices">Other available events:</label>
       ${selectBox.outerHTML}
       </div>`;
 
@@ -121,7 +126,7 @@
       const selectedOption = document.getElementById(act);
       const selectedText = selectedOption.options[selectedOption.value].text;
       // Redirect to another HTML file with the selected userID and lotID
-      window.location.href = `/views/bookplace.html?userID=${userID}&lotID=${lotID}&activity=${selectedText}`;
+      window.location.href = `/views/decor.html?customerID=${iduser}&userID=${userID}&lotID=${lotID}&activity=${selectedText}`;
 
     }
 

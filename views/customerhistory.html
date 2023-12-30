@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Bookings</title>
+  <title>My Bookings History</title>
 
   <style>
 
@@ -72,7 +72,7 @@ body {
   </style>
 </head>
 <body>
-  <div class="top">My Bookings</div>
+  <div class="top">My Bookings History</div>
 
   <div id="data-container"></div>
   <script>
@@ -91,7 +91,7 @@ body {
     async function fetchData() {
         try {
             var userID = getUrlParameter('userID');
-          const response = await fetch(`http://localhost:5005/mybookings?userID=${userID}`);
+          const response = await fetch(`http://localhost:5005/customerhistory?userID=${userID}`);
           const data = await response.json();
           console.log(data);
           displayData(data);
@@ -163,7 +163,7 @@ body {
             val = itm.total;
           }
 
-          alert(val);
+          //alert(val);
 
         } catch (error) {
           console.error('Error fetching data: ', error);

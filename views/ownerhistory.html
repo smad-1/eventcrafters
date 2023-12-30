@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Bookings</title>
+  <title>My Lot History</title>
 
   <style>
 
@@ -61,6 +61,7 @@ body {
 
   button{
     margin-left: 20px;
+    margin-bottom: 30px;
   padding: 10px;
   color: #fff; /* White text color */
   border: none;
@@ -69,10 +70,11 @@ body {
   width: 150px;
   }
 
+
   </style>
 </head>
 <body>
-  <div class="top">My Bookings</div>
+  <div class="top">My Lot History</div>
 
   <div id="data-container"></div>
   <script>
@@ -91,7 +93,7 @@ body {
     async function fetchData() {
         try {
             var userID = getUrlParameter('userID');
-          const response = await fetch(`http://localhost:5005/mybookings?userID=${userID}`);
+          const response = await fetch(`http://localhost:5005/ownerhistory?userID=${userID}`);
           const data = await response.json();
           console.log(data);
           displayData(data);
@@ -101,87 +103,81 @@ body {
     }
 
       async function displayData(data) {
-
       const container = document.getElementById('data-container');
       let num = 0;
 
-      function updateButton(itm, apr) {
-        
-              }
-
       for (const item of data) {
+          var paid = 0;
           const listItem = document.createElement('div');
 
           const buttonElement = document.createElement('button');
-          buttonElement.id = `button_${item.customerID}`;
+          const deets = document.createElement('button');
+          buttonElement.id = `button_${item.reservationID}`;
                 // Update button color and text based on the received data
                 if (item.state == 'requested') {
-                    buttonElement.style.backgroundColor = 'red';
-                    buttonElement.innerText = 'Pending Approval';
+                    buttonElement.style.backgroundColor = 'yellow';
+                    buttonElement.style.color = 'black';
+                    buttonElement.innerText = 'Approve?';
+                    buttonElement.addEventListener('click', () => handleApproveButtonClick(item.reservationID));
+
                 } else if (item.state == 'approved') {
-                    buttonElement.style.backgroundColor = 'orange';
-                    buttonElement.innerText = 'Payment Waiting';
-                    buttonElement.addEventListener('click', () => handlePaymentButtonClick(item.reservationID, item.lot, item.owner, item.eventDate));
+                    buttonElement.style.backgroundColor = 'red';
+                    buttonElement.innerText = 'Not Paid';
                 }
-                else {
+                else 
+                {
+                    paid = 1;
+                    deets.id = `button_paid_${item.reservationID}`;
                     buttonElement.style.backgroundColor = 'green';
                     buttonElement.innerText = 'Paid';
+                    deets.style.backgroundColor = 'black';
+        
+                    deets.innerText = 'Show Details';
+                    deets.addEventListener('click', () => history(item.owner));
                 }
+
 
           listItem.innerHTML = `
           <div class="card">
-            <strong>Lot ID: </strong>  ${item.lot}<br>
-            <strong>Owner ID: </strong>  ${item.customerID}<br>
+            <strong>Lot ID </strong>: ${item.lot} <br>
+            <strong>Customer ID </strong>: ${item.customerID} <br> 
             <div class="description">
-              <div class="type">${item.activityID}  </div>
+              <div class="type">${item.activityID}</div>
               <ul class="dropdown-content">
                 <li><b>Date of event: </b> ${item.eventDate}</li>
                 <li><b>Staring time: </b>${item.startTime}</li> <!-- ekhane cng-->
-                <li><b>Ending time: </b>${item.endTime}</li>
-                <li><b>Owner's contact: </b> ${item.Phone_no}</li>
-                <li><b>Owner's email: </b> ${item.Email}</li>
-                <li><b>Catering service: </b>${item.catering}</li>
-                <li><b>Decor service: </b>${item.decor}</li>
+                <li><b>Customer's contact: </b> ${item.Phone_no}</li>
+                <li><b>Customer's email: </b> ${item.Email}</li>
               </ul>
               
             </div>
-        </div>
-        `;
-          listItem.appendChild(buttonElement);
-          container.appendChild(listItem);
+        </div>`;
+            
+            listItem.appendChild(buttonElement);
+            if(paid === 1) 
+            {
+              listItem.appendChild(deets);
+            }
+            container.appendChild(listItem);
         }
       }
 
-      async function handlePaymentButtonClick(RID, lot, owner, edate) {
-        var val;
-       
-        try {
-          const resp = await fetch(`http://localhost:5005/total?resID=${RID}`);
-          const amount = await resp.json();
+       function handleApproveButtonClick(RID) {
+         fetch(`/updatetoApproved?reservationID=${RID}`);
+        const btn = document.getElementById(`button_${RID}`);
+        btn.style.backgroundColor = 'red';
+        btn.innerText = 'Not Paid';
 
-          for (const itm of amount) {
-            val = itm.total;
-          }
-
-          alert(val);
-
-        } catch (error) {
-          console.error('Error fetching data: ', error);
-        }
-        
-        window.location.href = `/views/Payment.html?reservationID=${RID}&lotId=${lot}&ownerID=${owner}&eventDate=${edate}&amount=${val}`;
-        //const btn = document.getElementById(`button_${RID}`);
-        //btn.style.backgroundColor = 'red';
-        //btn.innerText = 'Not Paid';
       }
 
       async function rentNow(useriD, lotID) {
         const selectedOption = document.getElementById(act);
         const selectedText = selectedOption.options[selectedOption.value].text;
       // Redirect to another HTML file with the selected userID and lotID
-      window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
+        window.location.href = `/views/bookplace.html?userID=${useriD}&lotID=${lotID}`;
 
-    }
+      }
+
   </script>
 </body>
 </html>

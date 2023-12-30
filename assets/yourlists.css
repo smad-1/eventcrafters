@@ -32,8 +32,8 @@ body {
   .sort {
   margin: 10px;
   padding: 10px;
-  background-color: #440f3c; /* Green background color */
-  color: #fff; /* White text color */
+  background-color: #efefef; /* Green background color */
+  color: black; /* White text color */
   border: none;
   border-radius: 5px;
   cursor: pointer;

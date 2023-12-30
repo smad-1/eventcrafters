@@ -3,161 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
+    <title>Birthday Decor</title>
     <style>
-       
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('../assets/images/bg10.jpg'); 
-            background-size: cover;
-            background-attachment: fixed; 
-            background-color: rgba(255, 255, 255, 0.2); 
+            background-image: url('../assets/images/decor_bg.jpg'); /* Replace with your image URL */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Fixed background */
+            color: #fff; /* Change text color for better visibility */
         }
 
-        #sidebar {
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #sidebar a {
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #fff;
-        }
-
-        #sidebar a:hover {
-            background-color: rgba(255, 255, 255, 0.1); 
-        }
 
         #content {
-            margin-left: 270px;
             padding: 20px;
             display: flex;
-            flex-wrap: wrap; 
-            gap: 20px; 
-            color: white;
-        
+            flex-wrap: wrap;
         }
 
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .decor-container {
+            background-color: rgba(255, 255, 255, 0.8); 
+            display: flex;
+            flex-direction: row; 
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
             padding: 10px;
-            width: 300px;
-            transition: transform 0.2s; 
-            color: rgb(255, 255, 255), 0.689; 
-        }
-
-        .card img {
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
             width: 100%;
-            height: 200px; 
-            object-fit: cover; 
         }
 
-        .card:hover {
-            transform: scale(1.10); 
+        .decor-image {
+            width: 200px; 
+            height: 350px; 
+            object-fit: contain; 
+            margin-right: 20px; 
+            align-items: left;
+        }
+        .decor-image:hover {
+            transform: scale(1.3); 
         }
 
-        #decor-type-container {
-            width: 100%;
-            padding: 20px 0;
-        }
 
-        #decor-type-heading {
-            font-size: 40px;
-            margin-left: 20px;
+        .decor-details {
+            color: #000; 
+            text-align: left; 
         }
-
-       
-        .card a {
-            text-decoration: none;
-            color: rgb(255, 255, 255); 
+        .skip-button {
+          
+            bottom: 100px;
+            padding: 10px 20px;
+            margin: 25px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: white;
+            border-radius: 5px;
+            font-size: 16px;
         }
         .skip-button {
           
           bottom: 100px;
           padding: 10px 20px;
           margin: 25px;
-          margin-left: 285px;
           background-color: #ffffff;
           color: rgb(0, 0, 0);
           border: white;
           border-radius: 5px;
           font-size: 16px;
       }
-      .skip-button:hover {
-          transform: scale(1.3); 
+      .select-button {
+          
+          bottom: 100px;
+          padding: 10px 20px;
+          margin: 25px;
+          background-color: #000000;
+          color: rgb(255, 255, 255);
+          border: white;
+          border-radius: 5px;
+          font-size: 16px;
+
       }
+        .skip-button:hover {
+            transform: scale(1.3); 
+        }
+        .select-button:hover {
+            transform: scale(1.3); 
+        }
 
     </style>
 </head>
 <body>
-    
+  
     <div id="content">
-        <div id="decor-type-container">
-            <h1 id="decor-type-heading">Choose Your Event</h1>
+        <div class="decor-container" id="1" value="2500">
+            <img class="decor-image" src="../assets/images/decor_light.jpg" alt="Decoration 1">
+            <img class="decor-image" src="../assets/images/s1.jpg" alt="Decoration 1">
+            <img class="decor-image" src="../assets/images/s2.jpg" alt="Decoration 1">
+            
+            <div class="decor-details">
+                <p>Total Cost: Tk.2500</p>
+                <p>Decor ID: D1</p>
+                <p>Time to Complete: 2.5 hours</p>
+                <p>We decorate all kinds of events in the most simpliest yet sophisticated way. You can add extras with a little charge</p>
+            </div>
+            <div>
+                <button class="select-button" onclick="select('d1', 2500)">select</button>
+            </div>
         </div>
-        <div class="card">
-            <a href="birthday_page.html">
-                <img src="../assets/images/bday.jpeg" alt="Image 1">
-                <h2>Birthday</h2>
-                <p>I hope your celebration gives you many happy memories!</p>
-            </a>
+        <div class="decor-container" id="2" value="3600">
+            <img class="decor-image" src="../assets/images/medium.jpg" alt="Decoration 2">
+            <img class="decor-image" src="../assets/images/medium2.jpg" alt="Decoration 2">
+            <img class="decor-image" src="../assets/images/medium3.jpg" alt="Decoration 2">
+            <div class="decor-details">
+                <p>Total Cost: Tk.3600</p>
+                <p>Decor ID: D2</p>
+                <p>Time to Complete: 4 hours</p>
+                <p>We provide medium range decorations. You can add extras as much as you want but with a little remuneration.</p>
+            </div>
+            <div>
+                <button class="select-button" onclick="select('d2', 3600)">select</button>
+            </div>
         </div>
-        <div class="card">
-            <a href="wedding_page.html">
-                <img src="../assets/images/wedding.jpg" alt="Image 2">
-                <h2>Wedding</h2>
-                <p>All in one -holud, mehendi, bridal shower, sangeet, reception</p>
-            </a>
-        </div>
-        <div class="card">
-            <a href="picnic_page.html">
-                <img src="../assets/images/picnic-food-header-1652811907.jpg" alt="Image 3">
-                <h2>Picnic</h2>
-                <p>Looking for an ESCAPE? This is your place.</p>
-            </a>
-        </div>
-        <div class="card">
-            <a href="baby_shower_page.html">
-                <img src="../assets/images/baby_shower.jpeg" alt="Image 4">
-                <h2>Baby Shower</h2>
-                <p>I'm so excited to 'shower' your little one with love.</p>
-            </a>
-        </div>
-        <div class="card">
-            <a href="conference_page.html">
-                <img src="../assets/images/conference.jpg" alt="Image 5">
-                <h2>Conference</h2>
-                <p>A conference is a gathering of people who singly can do nothing, but together can decide that nothing can be done.</p>
-            </a>
-        </div>
-        <div class="card">
-            <a href="celebration_page.html">
-                <img src="../assets/images/celebration.jpg" alt="Image 6">
-                <h2>Celebration Party</h2>
-                <p>A little celebration never killed anyone!</p>
-            </a>
-        </div>
-        <div class="card">
-            <a href="formal_gathering_page.html">
-                <img src="../assets/images/formal_gathering.jpg" alt="Image 7">
-                <h2>Formal Gathering</h2>
-                <p>Cheers to a warm welcome, delightful conversations, and cherished connections.</p>
-            </a>
+        <div class="decor-container" id="3" value="6000">
+            <img class="decor-image" src="../assets/images/heavy.jpg" alt="Decoration 3">
+            <img class="decor-image" src="../assets/images/heavy1.jpg" alt="Decoration 3">
+            <img class="decor-image" src="../assets/images/heavy2.jpg" alt="Decoration 3">
+            <div class="decor-details">
+                <p>Total Cost: Tk. 6000</p>
+                <p>Decor ID: D3</p>
+                <p>Time to Complete: 6.5 hour</p>
+                <p>We have gorgeous, jaw-dropping decorations that will elevate your event to another level. We decor all kinds of events.</p>
+            </div>
+            <div>
+                <button class="select-button" onclick="select('d3', 6000)">select</button>
+            </div>
         </div>
     </div>
-    <button class="skip-button">Skip</button>
+    <button class="skip-button" onclick="select('null', 0)">Skip</button>
+
+    <script>
+        function getUrlParameter(name) 
+        {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        var userID = getUrlParameter('userID');
+        var lotID = getUrlParameter('lotID');
+        var activity = getUrlParameter('activity');
+        var custID = getUrlParameter('customerID');
+
+        async function select(decor, price)
+        {
+            window.location.href = `/views/catering.html?customerID=${custID}&userID=${userID}&lotID=${lotID}&activity=${activity}&decor=${decor}&dprice=${price}`;
+        }
+    </script>
 </body>
 </html>

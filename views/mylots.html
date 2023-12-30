@@ -161,11 +161,12 @@ body {
                 .then(result => {
                     alert("inside alert");
                     console.log(result.message);
+                    window.location.href = `/views/mylots.html?userID=${useriD}`;
                 })
                 .catch(error => console.error('Error deleting task:', error));
                 
                 
-                window.location.href(`/views/mylots.html?userID=${useriD}`);
+                //window.location.href(`/views/mylots.html?userID=${useriD}`);
       }
 
   </script>

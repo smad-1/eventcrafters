@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,133 +8,187 @@
     <title>Rent a place</title>
     <link rel="stylesheet" href="../assets/rentform.css" class="css">
 </head>
+
 <body>
     <div class="container">
 
         <div class="apply_box">
-            
+
             <h1>Booking Application</h1>
 
             <form action="/bookplace" method="POST">
                 <div class="form_container">
                     <div class="form_control">
                         <label for="first_name">First Name:</label>
-                        <input id="first_name" name="first_name" placeholder="Enter First Name" required/>
+                        <input id="first_name" name="first_name" placeholder="Enter First Name" required />
                     </div>
 
                     <div class="form_control">
                         <label for="last_name">Last Name:</label>
-                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required/>
+                        <input id="last_name" name="last_name" placeholder="Enter Last Name" required />
                     </div>
 
                     <div class="form_control">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Enter Email" required/>
+                        <input type="email" id="email" name="email" placeholder="Enter Email" required />
                     </div>
 
                     <div class="form_control">
                         <label for="number">Phone number:</label>
-                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required/>
+                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required />
                     </div>
 
                     <div class="form_control">
                         <label for="lot">Lot ID:</label>
-                        <input type="text" id="lot" name="lot" placeholder="Enter Lot ID" required readonly="true"/>
-                    </div>
-                   
-
-                    <div class="form_control">
-                        <label for="catering">Catering Service:</label>
-                        <select name="catering" id="catering">
-                            <option value="">Select Catering Service</option>
-                            <option value="none">None</option>
-                            <option value="cat1">Service 1</option>
-                            <option value="cat2">Service 2</option>
-                            <option value="cat3">Service 3</option>
-                        </select>
+                        <input type="text" id="lot" name="lot" placeholder="Enter Lot ID" required readonly="true" />
                     </div>
 
                     <div class="form_control">
                         <label for="decor">Decoration Service:</label>
-                        <select name="decor" id="decor">
-                            <option value="">Select Decoration Service</option>
-                            <option value="none">None</option>
-                            <option value="decor1">Service 1</option>
-                            <option value="decor2">Service 2</option>
-                            <option value="decor3">Service 3</option>
-                        </select>
+                        <input type="decor" id="decor" name="decor" placeholder="Decoration Service" required
+                            readonly="true" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="cater">Catering service:</label>
+                        <input type="cater" id="cater" name="cater" placeholder="Catering Service" required
+                            readonly="true" />
+                    </div>
+
+                    <div class="form_control" style="display: none;">
+                        <label for="sendcat">Chosen activity:</label>
+                        <input type="sendcat" id="sendcat" name="sendcat" placeholder="Chosen activity" required
+                            readonly="true" />
+                    </div>
+
+                    <div class="form_control">
+                        <label for="type">Catering type:</label>
+                        <input type="type" id="type" name="type" placeholder="Type" required readonly="true" />
                     </div>
 
                     <div class="form_control">
                         <label for="capacity">Capacity:</label>
-                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required/>
+                        <input type="capacity" id="capacity" name="capacity" placeholder="Number of people" required />
                     </div>
 
                     <div class="form_control">
                         <label for="user">Owner:</label>
-                        <input type="owner" id="owner" name="owner" placeholder="Owner of lot" required readonly="true"/>
+                        <input type="owner" id="owner" name="owner" placeholder="Owner of lot" required
+                            readonly="true" />
                     </div>
 
                     <div class="form_control">
                         <label for="activitytype">Chosen activity:</label>
-                        <input type="activity" id="activity" name="activity" placeholder="Chosen activity" required readonly="true"/>
+                        <input type="activity" id="activity" name="activity" placeholder="Chosen activity" required
+                            readonly="true" />
                     </div>
 
-                    <script>
-                        function getUrlParameter(name) {
-                            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                            var results = regex.exec(location.search);
-                            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-                        }
+                    <div class="form_control" style="display: none;">
+                        <label for="sendtype">Chosen activity:</label>
+                        <input type="sendtype" id="sendtype" name="sendtype" required readonly="true" />
+                    </div>
 
-                        // Retrieve values
-                        var userID = getUrlParameter('userID');
-                        var lotID = getUrlParameter('lotID');
-                        var activity = getUrlParameter('activity');
-
-                        var lotInput = document.getElementById('lot');
-                        lotInput.value = lotID;
-                        var ownerInput = document.getElementById('owner');
-                        ownerInput.value = userID;
-                        var actInput = document.getElementById('activity');
-                        actInput.value = activity;
-
-                        // Log the values
-                        console.log('userID:', userID);
-                        console.log('lotID:', lotID);
-                        console.log('activity:', activity);
-                    </script>
+                    <div class="form_control" style="display: none;">
+                        <label for="senddec">Chosen activity:</label>
+                        <input type="senddec" id="senddec" name="senddec" required readonly="true" />
+                    </div>
 
                     <div class="form_control">
-                    <legend>
-                        Select Start Time: 
-                        <input type="time" name="stime">
-                    </legend>
+                        <legend>
+                            Select Start Time:
+                            <input type="time" name="stime">
+                        </legend>
                     </div>
 
 
                     <div class="form_control">
                         <label for="date">Date of event:</label>
-                        <input value="" type="date" id="date" name="date" />
+                        <input value="" type="date" id="date" name="date" required />
                     </div>
 
                     <div class="form_control">
                         <legend>
-                            Select End Time:   
+                            Select End Time:
                             <input type="time" name="etime">
                         </legend>
-                        </div>
+                    </div>
 
                 </div>
 
                 <div class="button">
-                    <button type="submit">Submit</button>
+                    <button type="submit" onclick="submitting()">Submit</button>
                 </div>
 
             </form>
         </div>
     </div>
-    
+
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Retrieve values
+        //            window.location.href = `/views/bookplace.html?userID=${userID}&lotID=${lotID}&activity=${activity}&decor=${decor}&dprice=${dprice}&cater=${cater}&type=${type}&cprice=${price}`;
+
+        var userID = getUrlParameter('userID');
+        var lotID = getUrlParameter('lotID');
+        var activity = getUrlParameter('activity');
+        var custID = getUrlParameter('customerID');
+
+
+        var lotInput = document.getElementById('lot');
+        lotInput.value = lotID;
+        var ownerInput = document.getElementById('owner');
+        ownerInput.value = userID;
+        var actInput = document.getElementById('activity');
+        actInput.value = activity;
+        document.getElementById('decor').value = getUrlParameter('decor') + " | BDT " + getUrlParameter('dprice');
+        document.getElementById('cater').value = getUrlParameter('cater');
+        document.getElementById('type').value = getUrlParameter('type') + " | BDT " + getUrlParameter('cprice') + "/person";
+        document.getElementById('sendtype').value = getUrlParameter('type');
+        document.getElementById('sendcat').value = getUrlParameter('cater');
+        document.getElementById('senddec').value = getUrlParameter('decor');
+        const cap = document.getElementById('capacity').value;
+        var datee = document.getElementById('date').value;
+
+        async function submitting() {
+            var val;
+
+            try {
+                const resp = await fetch(`http://localhost:5005/capanddate?userID=${userID}&lotID=${lotID}`);
+                const amount = await resp.json();
+
+                for (const itm of amount) {
+                    val = itm.capacity;
+                }
+
+                if(val < document.getElementById('capacity').value) 
+                {
+                    alert("Too many people. Maximum capacity is " + val + " people. Please reload the page.");
+                }
+
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            } 
+
+            const resp = fetch(`http://localhost:5005/getname?userID=${custID}`);
+            const usrname = resp.json();
+            var name;
+            for (const itm of usrname) {
+                name = itm.user_name;
+            }
+
+            window.location.href= `/views/welcome.html?userID=${custID}&username=${name}`;
+
+        }
+      
+
+    </script>
+
 </body>
+
 </html>

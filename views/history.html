@@ -71,12 +71,36 @@
     <div class="half left-half">
         <h1 style="color: #fff;">As Owner</h1>
         <p style="color: #fff;">View how many times and who have reserved your lots for their functions. Happy memories!</p>
-        <button id="leftButton">History</button>
+        <button id="leftButton" onclick="owner()">History</button>
     </div>
     <div class="half right-half">
         <h1 style="color:  rgb(0, 0, 0);">As Customer</h1>
         <p style="color:  rgb(0, 0, 0);">Check the lots you have booked and the services you checked in for. Enjoy your event!</p>
-        <button id="rightButton">History</button>
+        <button id="rightButton" onclick="customer()">History</button>
     </div>
+
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        const userID = getUrlParameter('userID');
+
+        async function owner()
+        {
+            window.location.href = `/views/ownerhistory.html?userID=${userID}`;
+
+        }
+
+        async function customer()
+        {
+            window.location.href = `/views/customerhistory.html?userID=${userID}`;
+
+        }
+
+    </script>
 </body>
 </html>

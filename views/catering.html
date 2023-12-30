@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +19,11 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -35,7 +38,7 @@
 
         .decor-container {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: center;
             margin: 20px;
             background: rgba(0, 0, 0, 0.5);
@@ -50,18 +53,18 @@
         }
 
         .decor-image {
-            width: 200px; 
-            height: 100px; 
-            object-fit: cover; 
+            width: 200px;
+            height: 100px;
+            object-fit: cover;
         }
 
         .decor-image:hover {
-            transform: scale(1.1); 
+            transform: scale(1.1);
         }
 
         .decor-details {
-            color: #fff; 
-            text-align: center; 
+            color: #fff;
+            text-align: center;
             padding: 10px;
         }
 
@@ -78,29 +81,43 @@
             cursor: pointer;
         }
 
+        .select-button {
+
+            bottom: 100px;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #0000006a;
+            color: rgb(255, 255, 255);
+            border: rgb(3, 1, 1);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
         .skip-button:hover {
-            transform: scale(1.5); 
+            transform: scale(1.5);
+        }
+        .select-button:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
+
 <body>
-  
+
     <div id="content">
         <div class="decor-container">
-            
+
             <img class="decor-image" src="../assets/images/catering1.jpg" alt="Catering 1">
             <img class="decor-image" src="../assets/images/catering2.jpg" alt="Catering 1">
             <img class="decor-image" src="../assets/images/catering3.jpg" alt="Catering 1">
             <div class="decor-details">
-             
+
                 <h2>Catering ID: C1</h2>
-                <ul>
-                    <li>Indian Cuisine- 340/plate</li>      
-                    <li>Chinese Cuisine - 400/plate</li>
-                    <li>Italian Cuisine - 500/plate</li>
-                  
-                </ul>
-     
+                <button class="select-button" onclick="select(1, 'Indian', 340)">Indian Cuisine- 340/plate</button><br>
+                <button class="select-button" onclick="select(1, 'Chinese', 400)">Chinese Cuisine - 400/plate</button><br>
+                <button class="select-button" onclick="select(1, 'Italian', 500)">Italian Cuisine - 500/plate</button><br>
+                
+
             </div>
         </div>
         <div class="decor-container">
@@ -108,36 +125,55 @@
             <img class="decor-image" src="../assets/images/catering6.jpg" alt="Catering 2">
             <img class="decor-image" src="../assets/images/catering7.jpg" alt="Catering 2">
             <div class="decor-details">
-               
+
                 <h2>Catering ID: C2</h2>
-                <ul>
-                    <li>French Cuisine - 430/plate</li>      
-                    <li>Continental - 370/plate</li>
-                    <li>Chinese Cuisine- 520/plate</li>
-                   
-                </ul>
-     
+                <button class="select-button" onclick="select(2, 'French', 430)">French Cuisine - 430/plate</button><br>
+                <button class="select-button" onclick="select(2, 'Continental', 370)">Continental - 370/plate</button><br>
+                <button class="select-button" onclick="select(2, 'Chinese', 520)">Chinese Cuisine- 520/plate</button><br>
+
             </div>
         </div>
         <div class="decor-container">
             <div class="image-container">
-            <img class="decor-image" src="../assets/images/catering8.jpg" alt="Catering 3">
-        </div>
+                <img class="decor-image" src="../assets/images/catering8.jpg" alt="Catering 3">
+            </div>
             <img class="decor-image" src="../assets/images/catering9.jpg" alt="Catering 3">
             <img class="decor-image" src="../assets/images/catering10.jpg" alt="Catering 3">
 
             <div class="decor-details">
-            
+
                 <h2>Catering ID: C3</h2>
-                <ul>
-                    <li>Turkish Cuisine- 550/plate</li>      
-                    <li>Bangladeshi Cuisine - 290/plate</li>
-                    <li>American Cuisine - 200/plate</li>
-                </ul>
+                <button class="select-button" onclick="select(3, 'Turkish', 550)">Turkish Cuisine- 550/plate</button><br>
+                <button class="select-button" onclick="select(3, 'Bangladeshi', 290)">Bangladeshi Cuisine - 290/plate</button><br>
+                <button class="select-button" onclick="select(3, 'American', 200)">American Cuisine - 200/plate</button><br>
+                
             </div>
         </div>
     </div>
-    
-    <button class="skip-button">Skip</button>
+
+    <button class="skip-button" onclick="select(0, 'null', 'null')">Skip</button>
+
+    <script>
+        function getUrlParameter(name) 
+        {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        var userID = getUrlParameter('userID');
+        var lotID = getUrlParameter('lotID');
+        var activity = getUrlParameter('activity')
+        var decor = getUrlParameter('decor')
+        var dprice = getUrlParameter('dprice')
+        var custID = getUrlParameter('customerID');
+
+        async function select(cater, type, price)
+        {
+            window.location.href = `/views/bookplace.html?customerID=${custID}&userID=${userID}&lotID=${lotID}&activity=${activity}&decor=${decor}&dprice=${dprice}&cater=${cater}&type=${type}&cprice=${price}`;
+        }
+    </script>
 </body>
+
 </html>

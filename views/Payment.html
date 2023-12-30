@@ -19,34 +19,20 @@
             <h1>Payment</h1>
             <form action="/payment" method="POST">
                 <div class="form_container">
-                    <div class="form_control">
-                        <label for="first_name">First Name:</label>
-                        <input id="first_name" name="first_name" placeholder="Enter First Name" required/>
-                    </div>
 
                     <div class="form_control">
-                        <label for="address">Address:</label>
-                        <input id="address" name="address" placeholder="Enter Your Address" required/>
-                    </div>
-
-                    <div class="form_control">
-                        <label for="number">Phone number:</label>
-                        <input type="number" id="number" name="number" placeholder="Enter Phone Number" required/>
-                    </div>
-
-                    <div class="form_control">
-                        <label for="date">Date of Booking:</label>
+                        <label for="date">Date of Payment:</label>
                         <input type="date" id="date" name="date" required/>
                     </div>
 
                     <div class="form_control">
                         <label for="lot">Lot ID:</label>
-                        <input type="number"  min="1" id="lot" name="lot" placeholder="Enter Lot ID" required/>
+                        <input type="number"  min="1" id="lot" name="lot" placeholder="Enter Lot ID" required readonly="true"/>
                     </div>
 
                     <div class="form_control">
-                        <label for="payment-method">Payment Method:</label>
-                        <select id="payment-method" name="payment_method">
+                        <label for="paymentMethod">Payment Method:</label>
+                        <select id="paymentMethod" name="payment_method">
                             <option value="">Choose your payment method</option>
                             <option value="credit_card">Credit Card</option>
                             <option value="bkash">bKash</option>
@@ -55,32 +41,32 @@
 
                     <div class="credit-card-fields" style="display: none;">
                         
-                        <label for="card-number">Card Number:</label>
-                        <input type="text" id="card-number" name="card_number">
-                        <label for="expire-number">Expiration Date:</label>
-                        <input type="text" id="expire-number" name="expire_number">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" name="card_number">
+                        <label for="expireNumber">Expiration Date:</label>
+                        <input type="text" id="expireNumber" name="expire_number">
                     </div>
 
                     <div class="bkash-number-field" style="display: none;">
-                        <label for="bkash-number">bKash Number:</label>
-                        <input type="text" id="bkash-number" name="bkash_number">
+                        <label for="bkashNumber">bKash Number:</label>
+                        <input type="text" id="bkashNumber" name="bkash_number">
                     </div>
 
                     <div class="form_control">
-                        <label for="amount">Amount:</label>
-                        <input type="text" id="amount" name="amount" required>
+                        <label for="amount">Amount (in taka):</label>
+                        <input type="text" id="amount" name="amount" required readonly="true">
                     </div>
                 </div>
 
                 <div class="button">
-                    <button type="submit">Submit</button>
+                    <button type="submit" onclick="submitting()">Submit</button>
                 </div>
             </form>
         </div>
     </div>
     
     <script>
-        const paymentMethodSelect = document.getElementById('payment-method');
+        const paymentMethodSelect = document.getElementById('paymentMethod');
         const creditCardFields = document.querySelector('.credit-card-fields');
         const bkashNumberField = document.querySelector('.bkash-number-field');
 
@@ -96,6 +82,57 @@
                 bkashNumberField.style.display = 'none';
             }
         });
+
+        function getUrlParameter(name) {
+			name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+			var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+			var results = regex.exec(location.search);
+			return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+		}
+		const ownerID = getUrlParameter('ownerID');
+		const lotID = getUrlParameter('lotId');
+		const reservationID = getUrlParameter('reservationID');
+        const amount = getUrlParameter('amount')
+    
+        document.getElementById('amount').value = amount;
+        document.getElementById('lot').value = lotID;
+
+		//document.addEventListener('DOMContentLoaded', submitting);
+
+		async function submitting() {
+
+			function getUrlParameter(name) {
+				name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+				var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+				var results = regex.exec(location.search);
+				return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+			}
+			const ownerID = getUrlParameter('ownerID');
+			const lotID = getUrlParameter('lotID');
+			const reservationID = getUrlParameter('reservationID');
+
+
+			fetch('/payment', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					ownerID: getUrlParameter('ownerID'),
+					reservationID: getUrlParameter('reservationID'),
+					lotID: getUrlParameter('lotId')
+				}),
+
+			})
+				.then(response => response.json())
+				.then(result => {
+					alert("inside alert" + ownerID + reservationID + lotID);
+					console.log(result.message);
+				})
+				.catch(error => console.error('Error deleting task:', error));
+
+			//window.location.href = `/views/feedback.html?ownerID=${ownerID}&lotID=${lotID}&customerID=${customerID}`;
+		}
 
         
     </script>
